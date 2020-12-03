@@ -9,3 +9,14 @@ C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\obj\Release\LimFTPClient.
 C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\obj\Release\LimFTPClient.csproj.CoreCompileInputs.cache
 C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\obj\Release\LimFTPClient.exe
 C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\obj\Release\LimFTPClient.pdb
+C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\bin\Release\LimFTPClient.exe.config
+C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\bin\Release\LimFTPClient.exe
+C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\bin\Release\LimFTPClient.pdb
+C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.AppForm.resources
+C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.MainForm.resources
+C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.ParamsBox.resources
+C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.Properties.Resources.resources
+C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.csproj.GenerateResource.cache
+C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.csproj.CoreCompileInputs.cache
+C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.exe
+C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.pdb

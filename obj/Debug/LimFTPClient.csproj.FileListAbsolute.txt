@@ -1,0 +1,12 @@
+C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\bin\Debug\LimFTPClient.exe.config
+C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\bin\Debug\LimFTPClient.exe
+C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\bin\Debug\LimFTPClient.pdb
+C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\obj\Debug\LimFTPClient.csprojAssemblyReference.cache
+C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\obj\Debug\LimFTPClient.Properties.Resources.resources
+C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\obj\Debug\LimFTPClient.csproj.GenerateResource.cache
+C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\obj\Debug\LimFTPClient.csproj.CoreCompileInputs.cache
+C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\obj\Debug\LimFTPClient.exe
+C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\obj\Debug\LimFTPClient.pdb
+C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\obj\Debug\LimFTPClient.AppForm.resources
+C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\obj\Debug\LimFTPClient.MainForm.resources
+C:\Users\Limows\source\repos\LimFTPClient\LimFTPClient\obj\Debug\LimFTPClient.ParamsBox.resources

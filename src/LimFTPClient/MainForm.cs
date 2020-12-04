@@ -51,7 +51,7 @@ namespace LimFTPClient
             {   
                 Parameters.SystemURI = new Uri(Parameters.ServerURI, SystemsBox.Text);
                 Parameters.CurrentURI = Parameters.SystemURI;
-                MessageBox.Show(Parameters.CurrentURI.ToString());
+                //MessageBox.Show(Parameters.CurrentURI.ToString());
 
                 try
                 {

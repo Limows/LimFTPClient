@@ -42,7 +42,7 @@
             // SystemsBox
             // 
             this.SystemsBox.FormattingEnabled = true;
-            this.SystemsBox.Location = new System.Drawing.Point(83, 65);
+            this.SystemsBox.Location = new System.Drawing.Point(79, 65);
             this.SystemsBox.Name = "SystemsBox";
             this.SystemsBox.Size = new System.Drawing.Size(304, 316);
             this.SystemsBox.TabIndex = 0;
@@ -52,7 +52,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(80, 36);
+            this.label1.Location = new System.Drawing.Point(75, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 13);
             this.label1.TabIndex = 1;
@@ -61,7 +61,7 @@
             // 
             // ConnectButton
             // 
-            this.ConnectButton.Location = new System.Drawing.Point(193, 406);
+            this.ConnectButton.Location = new System.Drawing.Point(181, 406);
             this.ConnectButton.Name = "ConnectButton";
             this.ConnectButton.Size = new System.Drawing.Size(93, 23);
             this.ConnectButton.TabIndex = 2;
@@ -108,9 +108,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SystemsBox);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "LimFTPClient";
+            this.Text = "LimFTP Client";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

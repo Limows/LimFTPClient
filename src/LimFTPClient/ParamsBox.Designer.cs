@@ -52,7 +52,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(155, 365);
+            this.SaveButton.Location = new System.Drawing.Point(171, 363);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 2;
@@ -75,12 +75,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(422, 400);
+            this.ControlBox = false;
             this.Controls.Add(this.OpenDirButton);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DownloadPathBox);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ParamsBox";
-            this.Text = "ParamsBox";
+            this.Text = "Параметры";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.ParamsBox_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

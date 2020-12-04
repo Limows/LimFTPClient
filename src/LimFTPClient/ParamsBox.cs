@@ -25,5 +25,14 @@ namespace LimFTPClient
         {
             DownloadPathBox.Text = Parameters.DownloadPath;
         }
+
+        private void OpenDirButton_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog OpenDir = new FolderBrowserDialog();
+            if (OpenDir.ShowDialog() == DialogResult.OK)
+            {
+                DownloadPathBox.Text = OpenDir.SelectedPath;
+            }
+        }
     }
 }

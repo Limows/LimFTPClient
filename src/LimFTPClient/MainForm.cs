@@ -29,7 +29,9 @@ namespace LimFTPClient
         {
             label1.Text = "Выберите нужную систему";
             Parameters.CurrentURI = Parameters.ServerURI;
-            ReadListing(Parameters.CurrentURI);
+            SystemsBox.DataSource = null;
+            SystemsBox.Items.Clear();
+            SystemsBox.Items.AddRange(FTP.ReadListing(Parameters.CurrentURI).ToArray());
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -47,57 +49,33 @@ namespace LimFTPClient
             label1.Text = "Выберите нужное приложение";
             if (Parameters.CurrentURI == Parameters.ServerURI)
             {   
-                Parameters.SystemURI = new Uri(Parameters.ServerURI.ToString() + SystemsBox.Text);
-                //DownloadFile(Parameters.CurrentURI, "E:\\");
+                Parameters.SystemURI = new Uri(Parameters.ServerURI, SystemsBox.Text);
                 Parameters.CurrentURI = Parameters.SystemURI;
-                ReadListing(Parameters.CurrentURI);
+                MessageBox.Show(Parameters.CurrentURI.ToString());
+
+                try
+                {
+                    SystemsBox.DataSource = null;
+                    SystemsBox.Items.Clear();
+                    SystemsBox.Items.AddRange(FTP.ReadListing(Parameters.CurrentURI).ToArray());
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка в структуре", "Ошибка");
+                    label1.Text = "Выберите нужную систему";
+                    SystemsBox.DataSource = null;
+                    SystemsBox.Items.Clear();
+                    SystemsBox.Items.AddRange(FTP.ReadListing(Parameters.ServerURI).ToArray());
+                }
             }
             else
             {
                 Parameters.AppURI = new Uri(Parameters.CurrentURI.ToString() + "/" + SystemsBox.Text);
                 Parameters.CurrentURI = Parameters.AppURI;
+                //MessageBox.Show(Parameters.CurrentURI.ToString());
                 AppForm NewAppForm = new AppForm(SystemsBox.Text);
                 NewAppForm.ShowDialog();
             }
-        }
-
-        private Stream CreateListingRequest (Uri URI)
-        {
-            FtpWebRequest FTPRequest = (FtpWebRequest)WebRequest.Create(URI);
-            FTPRequest.UseBinary = true;
-            FTPRequest.KeepAlive = false;
-            FTPRequest.Credentials = new NetworkCredential("anon", "");
-            FTPRequest.Method = WebRequestMethods.Ftp.ListDirectory;
-            FtpWebResponse Response = (FtpWebResponse)FTPRequest.GetResponse();
-
-            return Response.GetResponseStream();
-        }
-
-        private void ReadListing(Uri URI)
-        {
-            SystemsBox.DataSource = null;
-            SystemsBox.Items.Clear();
-
-            StreamReader FTPReader = new StreamReader(CreateListingRequest(URI));
-
-            string line = FTPReader.ReadLine();
-            while (!string.IsNullOrEmpty(line))
-            {
-                if (line.IndexOf('.') != -1)
-                {
-                    MessageBox.Show("Ошибка в структуре", "Ошибка");
-                    label1.Text = "Выберите нужную систему";
-                    ReadListing(Parameters.ServerURI);
-                    Parameters.CurrentURI = Parameters.ServerURI;
-                    break;
-                }
-
-                SystemsBox.Items.Add(line);
-                line = FTPReader.ReadLine();
-            }
-
-            FTPReader.Close();
-            FTPReader.Dispose();
         }
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)

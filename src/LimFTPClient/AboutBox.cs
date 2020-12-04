@@ -14,13 +14,11 @@ namespace LimFTPClient
         {
             InitializeComponent();
 
-            string BuildDate = " Build 04.12.20";
-
             this.Text = String.Format("О программе {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = String.Format("Версия {0}", AssemblyVersion + BuildDate);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany;
+            this.labelVersion.Text = String.Format("Версия {0}", AssemblyVersion);
+            this.labelCopyright.Text = String.Format("Сборка от {0}", DateTime.Today.ToString("dd.MM.yy"));
+            this.labelCompanyName.Text = String.Format("Автор {0} <{1}>", AssemblyCompany, "Limowski256@gmail.com");
             this.textBoxDescription.Text = AssemblyDescription;
         }
 

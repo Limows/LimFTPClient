@@ -34,8 +34,15 @@ namespace LimFTPClient
             if (Parameters.DownloadPath != null)
             {
                 label1.Text = "Загрузка " + AppName + " в папку " + Parameters.DownloadPath;
-                await Task.Run(() => FTP.DownloadFile(Parameters.CurrentURI, Parameters.DownloadPath + "\\" + FileName));
-                label1.Text = "Успешно загружено";
+                try
+                {
+                    await Task.Run(() => FTP.DownloadFile(Parameters.CurrentURI, Parameters.DownloadPath + "\\" + FileName));
+                    label1.Text = "Успешно загружено";
+                }
+                catch
+                {
+                    label1.Text = "Загрузка не удалась";
+                }
             }
             else
             {
@@ -52,8 +59,7 @@ namespace LimFTPClient
             Parameters.CurrentURI = new Uri(Parameters.AppURI.ToString() + "/" + InfoFileName);
             try
             {
-                AboutAppBox.Text = FTP.LoadInfo(Parameters.CurrentURI);
-                
+                AboutAppBox.Text = FTP.LoadInfo(Parameters.CurrentURI);             
             }
             catch
             {

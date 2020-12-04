@@ -16,25 +16,9 @@ namespace LimFTPClient
         public MainForm()
         {   
             InitializeComponent();
-
-
         }
 
         private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ConnectButton_Click(object sender, EventArgs e)
-        {
-            label1.Text = "Выберите нужную систему";
-            Parameters.CurrentURI = Parameters.ServerURI;
-            SystemsBox.DataSource = null;
-            SystemsBox.Items.Clear();
-            SystemsBox.Items.AddRange(FTP.ReadListing(Parameters.CurrentURI).ToArray());
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
@@ -61,11 +45,8 @@ namespace LimFTPClient
                 }
                 catch
                 {
-                    MessageBox.Show("Ошибка в структуре", "Ошибка");
-                    label1.Text = "Выберите нужную систему";
-                    SystemsBox.DataSource = null;
-                    SystemsBox.Items.Clear();
-                    SystemsBox.Items.AddRange(FTP.ReadListing(Parameters.ServerURI).ToArray());
+                    MessageBox.Show("Репозиторий пуст", "Ошибка");
+                    Connect();
                 }
             }
             else
@@ -78,17 +59,50 @@ namespace LimFTPClient
             }
         }
 
-        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Connect()
+        {
+            label1.Text = "Выберите нужную систему";
+            StatusLabel.Text = "Подключение...";
+            Parameters.CurrentURI = Parameters.ServerURI;
+            SystemsBox.DataSource = null;
+            SystemsBox.Items.Clear();
+            try
+            {
+                SystemsBox.Items.AddRange(FTP.ReadListing(Parameters.CurrentURI).ToArray());
+                StatusLabel.Text = "Подключено";
+            }
+            catch
+            {
+                StatusLabel.Text = "Подключение не удалось";
+            }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            Connect();
+        }
+
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            Connect();
+        }
+
+        private void ParamsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ParamsBox NewParamsBox = new ParamsBox();
+            NewParamsBox.ShowDialog();
+        }
+
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //MessageBox.Show("Версия 0.1\nСборка от 03.12.20", "О программе");
             AboutBox NewAboutBox = new AboutBox();
             NewAboutBox.Show();
         }
 
-        private void параметрыToolStripMenuItem_Click(object sender, EventArgs e)
+        private void справкаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ParamsBox NewParamsBox = new ParamsBox();
-            NewParamsBox.ShowDialog();
+            MessageBox.Show("Для выбора в списке\nиспользуйте двойной щелчок", "Справка");
         }
     }
 }

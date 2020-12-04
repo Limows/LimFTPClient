@@ -86,18 +86,27 @@ namespace LimFTPClient
             {
                 if (line.IndexOf('.') != -1)
                 {
-                    Parameters.CurrentURI = Parameters.ServerURI;
-                    FTPReader.Close();
-                    FTPReader.Dispose();
-                    throw new Exception("Error in structure");
+                    //Parameters.CurrentURI = Parameters.ServerURI;
+                    //FTPReader.Close();
+                    //FTPReader.Dispose();
+                    //throw new Exception("Error in structure");
+                }
+                else
+                {
+                    SystemsList.Add(line);
                 }
 
-                SystemsList.Add(line);
                 line = FTPReader.ReadLine();
             }
 
             FTPReader.Close();
             FTPReader.Dispose();
+
+            if (SystemsList.Count == 0)
+            {
+                Parameters.CurrentURI = Parameters.ServerURI;
+                throw new Exception("Repo is empty");
+            }
 
             return SystemsList;
         }

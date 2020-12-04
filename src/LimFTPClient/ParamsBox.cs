@@ -17,8 +17,15 @@ namespace LimFTPClient
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            Parameters.DownloadPath = DownloadPathBox.Text;
-            Close();
+            if (DownloadPathBox.Text != "")
+            {
+                Parameters.DownloadPath = DownloadPathBox.Text;
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Отсуствует путь", "Ошибка");
+            }
         }
 
         private void ParamsBox_Load(object sender, EventArgs e)

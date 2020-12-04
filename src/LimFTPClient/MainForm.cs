@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Net;
@@ -104,7 +102,9 @@ namespace LimFTPClient
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Версия 0.1\nСборка от 03.12.20", "О программе");
+            //MessageBox.Show("Версия 0.1\nСборка от 03.12.20", "О программе");
+            AboutBox NewAboutBox = new AboutBox();
+            NewAboutBox.Show();
         }
 
         private void параметрыToolStripMenuItem_Click(object sender, EventArgs e)

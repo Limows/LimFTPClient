@@ -1,40 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Text;
-using System.Windows.Forms;
 using System.IO;
 using System.Net;
 
 namespace LimFTPClient
 {
-    public partial class AppForm : Form
+    class FTP
     {
-        string AppName;
-
-        public AppForm(string CurrentAppName)
-        {
-            InitializeComponent();
-
-            AppName = CurrentAppName;
-        }
-
-
-
-        private void DownloadButton_Click(object sender, EventArgs e)
-        {
-            string FileName = AppName + ".zip";
-            Parameters.CurrentURI = new Uri(Parameters.AppURI.ToString() + "/" + FileName);
-            //MessageBox.Show(Parameters.CurrentURI.ToString());
-            if (Parameters.DownloadPath != null)
-                DownloadFile(Parameters.CurrentURI, Parameters.DownloadPath + FileName);
-            else MessageBox.Show("Отсутствует путь для сохранения файла", "Ошибка");
-            Parameters.CurrentURI = Parameters.AppURI;
-        }
-
-        private Stream CreateDownloadRequest(Uri URI)
+        static public Stream CreateDownloadRequest(Uri URI)
         {
             FtpWebRequest FTPRequest = (FtpWebRequest)WebRequest.Create(URI);
             FTPRequest.UseBinary = true;
@@ -46,7 +20,7 @@ namespace LimFTPClient
             return Response.GetResponseStream();
         }
 
-        private void DownloadFile(Uri URI, string FilePath)
+        static public void DownloadFile(Uri URI, string FilePath)
         {
             FileStream outputStream = new FileStream(FilePath, FileMode.Create);
 
@@ -67,7 +41,7 @@ namespace LimFTPClient
             FTPReader.Dispose();
         }
 
-        private void LoadInfo(Uri URI)
+        static public void LoadInfo(Uri URI)
         {
             Stream outputStream = new MemoryStream();
             Stream FTPReader = CreateDownloadRequest(URI);
@@ -79,7 +53,7 @@ namespace LimFTPClient
             while (readCount > 0)
             {
                 //outputStream.Write(buffer, 0, readCount);
-                AboutAppBox.Text += Encoding.UTF8.GetString(buffer, 0, bufferSize);
+                //AboutAppBox.Text += Encoding.UTF8.GetString(buffer, 0, bufferSize);
                 readCount = FTPReader.Read(buffer, 0, bufferSize);
             }
 
@@ -88,26 +62,43 @@ namespace LimFTPClient
             FTPReader.Dispose();
         }
 
-        private void AppForm_Load(object sender, EventArgs e)
+        static public Stream CreateListingRequest(Uri URI)
         {
-            this.Text = AppName;
-            Parameters.CurrentURI = new Uri(Parameters.AppURI.ToString() + "/Info.txt");
-            try
-            {
-                LoadInfo(Parameters.CurrentURI);
-            }
-            catch
-            {
-                AboutAppBox.Text = "Для этого приложения ещё нет описания";
-            }
-            Parameters.CurrentURI = Parameters.AppURI;
+            FtpWebRequest FTPRequest = (FtpWebRequest)WebRequest.Create(URI);
+            FTPRequest.UseBinary = true;
+            FTPRequest.KeepAlive = false;
+            FTPRequest.Credentials = new NetworkCredential("anon", "");
+            FTPRequest.Method = WebRequestMethods.Ftp.ListDirectory;
+            FtpWebResponse Response = (FtpWebResponse)FTPRequest.GetResponse();
 
+            return Response.GetResponseStream();
         }
 
-        private void AppForm_FormClosing(object sender, FormClosingEventArgs e)
+        static public void ReadListing(Uri URI)
         {
-            Parameters.CurrentURI = Parameters.SystemURI;
-            //MessageBox.Show(Parameters.CurrentURI.ToString());
+            //SystemsBox.DataSource = null;
+            //SystemsBox.Items.Clear();
+
+            StreamReader FTPReader = new StreamReader(CreateListingRequest(URI));
+
+            string line = FTPReader.ReadLine();
+            while (!string.IsNullOrEmpty(line))
+            {
+                if (line.IndexOf('.') != -1)
+                {
+                    //MessageBox.Show("Ошибка в структуре", "Ошибка");
+                    //label1.Text = "Выберите нужную систему";
+                    ReadListing(Parameters.ServerURI);
+                    Parameters.CurrentURI = Parameters.ServerURI;
+                    break;
+                }
+
+                //SystemsBox.Items.Add(line);
+                line = FTPReader.ReadLine();
+            }
+
+            FTPReader.Close();
+            FTPReader.Dispose();
         }
     }
 }

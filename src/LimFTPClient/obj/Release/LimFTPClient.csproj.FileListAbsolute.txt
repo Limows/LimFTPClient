@@ -20,3 +20,5 @@ C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.cs
 C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.csproj.CoreCompileInputs.cache
 C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.exe
 C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.pdb
+C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.csprojAssemblyReference.cache
+C:\My Documents\GitHub\LimFTPClient\src\LimFTPClient\obj\Release\LimFTPClient.AboutBox.resources

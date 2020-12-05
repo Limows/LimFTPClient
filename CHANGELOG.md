@@ -4,29 +4,29 @@
 
 ### Added
 
-New UI
+ - New UI
 
 ### Changed
 
-Configuration is now saved to a separate file
+ - Configuration is now saved to a separate file
 
 ### Fixed
 
-Stability improvements
+ - Stability improvements
 
 ## [v0.1.2] - (04.12.20)
 
 ### Added
 
-Exception handling.
+ - Exception handling.
 
 ### Changed
 
-Removed a stub from repositories that are not yet ready to work with the application. Now it is possible to connect to anyone, and the packages will appear as soon as they are ready.
+ - Removed a stub from repositories that are not yet ready to work with the application. Now it is possible to connect to anyone, and the packages will appear as soon as they are ready.
 
 ### Fixed
 
-UI updates and fixes.
+ - UI updates and fixes.
 
 ## [v0.1.1] - (04.12.20)
 

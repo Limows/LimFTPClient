@@ -18,13 +18,25 @@ namespace LimFTPClient
         private void SaveButton_Click(object sender, EventArgs e)
         {
             if (DownloadPathBox.Text != "")
-            {
-                Parameters.DownloadPath = DownloadPathBox.Text;
-                Close();
+            {	
+				if  (Directory.Exists(DownloadPathBox.Text))
+				{
+					Parameters.DownloadPath = DownloadPathBox.Text;
+					Close();
+				}
+				else
+				{
+					DialogResult Result = MessageBox.Show("Такая папка не сушествует.\nСоздать?", "Предупреждение",MessageBoxButtons.YesNo);
+					
+					if (Result == DialogResult.Yes)
+					{
+						Directory.CreateDirectory(DownloadPathBox.Text)
+					}
+				}
             }
             else
             {
-                MessageBox.Show("Отсуствует путь", "Ошибка");
+                MessageBox.Show("Путь не может быть пустым", "Предупреждение");
             }
         }
 

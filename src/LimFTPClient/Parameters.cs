@@ -12,5 +12,6 @@ namespace LimFTPClient
         static public Uri SystemURI;
         static public Uri AppURI;
         static public string DownloadPath;
+        static public string ConfigPath = "Default.cfg";
     }
 }

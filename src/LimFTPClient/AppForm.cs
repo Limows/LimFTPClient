@@ -14,7 +14,7 @@ namespace LimFTPClient
 {
     public partial class AppForm : Form
     {
-        string AppName;
+        private string AppName;
 
         public AppForm(string CurrentAppName)
         {
@@ -39,10 +39,18 @@ namespace LimFTPClient
                     await Task.Run(() => FTP.DownloadFile(Parameters.CurrentURI, Parameters.DownloadPath + "\\" + FileName));
                     label1.Text = "Успешно загружено";
                 }
-                catch
+                catch (WebException)
                 {
+                    File.Delete(Parameters.DownloadPath + "\\" + FileName);
                     label1.Text = "Загрузка не удалась";
                 }
+                catch (IOException)
+                {
+                    MessageBox.Show("Невозможно сохранить в " + Parameters.DownloadPath + "\nВозможно программа должна быть\nзапущена от имени администратора", "Ошибка");
+                    label1.Text = "Загрузка не удалась";
+                }
+
+
             }
             else
             {

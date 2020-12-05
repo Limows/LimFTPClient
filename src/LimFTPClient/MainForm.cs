@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.IO;
 using System.Net;
 
 namespace LimFTPClient
@@ -16,6 +15,16 @@ namespace LimFTPClient
         public MainForm()
         {   
             InitializeComponent();
+
+            try
+            {
+                IO.LoadParameters();
+            }
+            catch
+            {
+                IO.RemoveParameters();
+            }
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -62,18 +71,18 @@ namespace LimFTPClient
         private void Connect()
         {
             label1.Text = "Выберите нужную систему";
-            StatusLabel.Text = "Подключение...";
+            ConnectionStatusLabel.Text = "Подключение...";
             Parameters.CurrentURI = Parameters.ServerURI;
             SystemsBox.DataSource = null;
             SystemsBox.Items.Clear();
             try
             {
                 SystemsBox.Items.AddRange(FTP.ReadListing(Parameters.CurrentURI).ToArray());
-                StatusLabel.Text = "Подключено";
+                ConnectionStatusLabel.Text = "Подключено";
             }
             catch
             {
-                StatusLabel.Text = "Подключение не удалось";
+                ConnectionStatusLabel.Text = "Подключение не удалось";
             }
         }
 
@@ -103,6 +112,26 @@ namespace LimFTPClient
         private void справкаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Для выбора в списке\nиспользуйте двойной щелчок", "Справка");
+        }
+
+        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SystemsBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            IO.SaveParameters();
         }
     }
 }

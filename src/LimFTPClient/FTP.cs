@@ -24,9 +24,21 @@ namespace LimFTPClient
 
         static public void DownloadFile(Uri URI, string FilePath)
         {
-            FileStream outputStream = new FileStream(FilePath, FileMode.Create);
 
             Stream FTPReader = CreateDownloadRequest(URI);
+            FileStream outputStream;
+
+            try
+            {
+                outputStream = new FileStream(FilePath, FileMode.Create);
+            }
+            catch
+            {
+                FTPReader.Dispose();
+                FTPReader.Close();
+
+                throw new IOException();
+            }
             int bufferSize = 1024;
             int readCount;
             byte[] buffer = new byte[bufferSize];
@@ -39,8 +51,8 @@ namespace LimFTPClient
             }
 
             outputStream.Close();
-            FTPReader.Close();
             FTPReader.Dispose();
+            FTPReader.Close();
         }
 
         static public string LoadInfo(Uri URI)
@@ -58,8 +70,8 @@ namespace LimFTPClient
                 readCount = FTPReader.Read(buffer, 0, bufferSize);
             }
 
-            FTPReader.Close();
             FTPReader.Dispose();
+            FTPReader.Close();
 
             return AppInfo;
         }
@@ -99,8 +111,8 @@ namespace LimFTPClient
                 line = FTPReader.ReadLine();
             }
 
-            FTPReader.Close();
             FTPReader.Dispose();
+            FTPReader.Close();
 
             if (SystemsList.Count == 0)
             {

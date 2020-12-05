@@ -35,7 +35,7 @@
             // 
             // DownloadButton
             // 
-            this.DownloadButton.Location = new System.Drawing.Point(154, 273);
+            this.DownloadButton.Location = new System.Drawing.Point(18, 280);
             this.DownloadButton.Name = "DownloadButton";
             this.DownloadButton.Size = new System.Drawing.Size(75, 23);
             this.DownloadButton.TabIndex = 0;
@@ -45,17 +45,19 @@
             // 
             // AboutAppBox
             // 
-            this.AboutAppBox.Location = new System.Drawing.Point(12, 12);
+            this.AboutAppBox.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.AboutAppBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.AboutAppBox.Location = new System.Drawing.Point(307, 12);
             this.AboutAppBox.Name = "AboutAppBox";
             this.AboutAppBox.ReadOnly = true;
-            this.AboutAppBox.Size = new System.Drawing.Size(369, 147);
+            this.AboutAppBox.Size = new System.Drawing.Size(167, 258);
             this.AboutAppBox.TabIndex = 1;
             this.AboutAppBox.Text = "";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 181);
+            this.label1.Location = new System.Drawing.Point(25, 232);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 3;
@@ -64,7 +66,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 319);
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.ClientSize = new System.Drawing.Size(486, 315);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.AboutAppBox);
             this.Controls.Add(this.DownloadButton);
@@ -72,6 +75,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AppForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AppForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AppForm_FormClosing);
             this.Load += new System.EventHandler(this.AppForm_Load);

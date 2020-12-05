@@ -36,15 +36,15 @@
             // 
             // DownloadPathBox
             // 
-            this.DownloadPathBox.Location = new System.Drawing.Point(104, 186);
+            this.DownloadPathBox.Location = new System.Drawing.Point(98, 186);
             this.DownloadPathBox.Name = "DownloadPathBox";
-            this.DownloadPathBox.Size = new System.Drawing.Size(215, 20);
+            this.DownloadPathBox.Size = new System.Drawing.Size(168, 20);
             this.DownloadPathBox.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 189);
+            this.label1.Location = new System.Drawing.Point(12, 188);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 13);
             this.label1.TabIndex = 1;
@@ -52,7 +52,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(171, 363);
+            this.SaveButton.Location = new System.Drawing.Point(137, 365);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
             this.SaveButton.TabIndex = 2;
@@ -62,7 +62,7 @@
             // 
             // OpenDirButton
             // 
-            this.OpenDirButton.Location = new System.Drawing.Point(325, 186);
+            this.OpenDirButton.Location = new System.Drawing.Point(273, 185);
             this.OpenDirButton.Name = "OpenDirButton";
             this.OpenDirButton.Size = new System.Drawing.Size(75, 23);
             this.OpenDirButton.TabIndex = 3;
@@ -74,7 +74,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(422, 400);
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.ClientSize = new System.Drawing.Size(366, 400);
             this.ControlBox = false;
             this.Controls.Add(this.OpenDirButton);
             this.Controls.Add(this.SaveButton);
@@ -84,6 +85,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ParamsBox";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Параметры";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.ParamsBox_Load);

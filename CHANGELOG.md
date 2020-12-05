@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.2] (04.12.20)
+## [v0.2.0] - (05.12.20)
 
 ### Added
 
@@ -14,7 +14,7 @@ Configuration is now saved to a separate file
 
 Stability improvements
 
-## [v0.1.2] (04.12.20)
+## [v0.1.2] - (04.12.20)
 
 ### Added
 
@@ -24,11 +24,11 @@ Exception handling.
 
 Removed a stub from repositories that are not yet ready to work with the application. Now it is possible to connect to anyone, and the packages will appear as soon as they are ready.
 
-###Fixed
+### Fixed
 
 UI updates and fixes.
 
-## [v0.1.1] (04.12.20)
+## [v0.1.1] - (04.12.20)
 
 ### Added
 
@@ -40,11 +40,16 @@ UI updates and fixes.
  - FTP functions moved to a separate class.
  - .Net version dropped to 4.5 for better compatibility.
 
-###Fixed
+### Fixed
 
  - Some improvements in UI.
  - Minor fixes.
 
-## v0.1.0 (03.12.20)
+## [v0.1.0] - (03.12.20)
 
  - First release.
+ 
+[v0.2.0]: https://github.com/Limows/LimFTPClient/releases/tag/v0.2
+[v0.1.2]: https://github.com/Limows/LimFTPClient/releases/tag/v0.1.2
+[v0.1.1]: https://github.com/Limows/LimFTPClient/releases/tag/v0.1.1
+[v0.1.0]: https://github.com/Limows/LimFTPClient/releases/tag/0.1

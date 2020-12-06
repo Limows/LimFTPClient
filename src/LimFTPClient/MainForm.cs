@@ -54,7 +54,7 @@ namespace LimFTPClient
                 }
                 catch
                 {
-                    MessageBox.Show("Репозиторий пуст", "Ошибка");
+                    MessageBox.Show("Репозиторий пуст", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Connect();
                 }
             }
@@ -111,7 +111,7 @@ namespace LimFTPClient
 
         private void справкаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Для выбора в списке\nиспользуйте двойной щелчок", "Справка");
+            MessageBox.Show("Для выбора в списке\nиспользуйте двойной щелчок", "Справка", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)

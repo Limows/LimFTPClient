@@ -46,7 +46,7 @@ namespace LimFTPClient
                 }
                 catch (IOException)
                 {
-                    MessageBox.Show("Невозможно сохранить в " + Parameters.DownloadPath + "\nВозможно программа должна быть\nзапущена от имени администратора", "Ошибка");
+                    MessageBox.Show("Невозможно сохранить в " + Parameters.DownloadPath + "\nВозможно программа должна быть\nзапущена от имени администратора", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     label1.Text = "Загрузка не удалась";
                 }
 
@@ -54,7 +54,7 @@ namespace LimFTPClient
             }
             else
             {
-                MessageBox.Show("Отсутствует путь для сохранения файла", "Ошибка");
+                MessageBox.Show("Отсутствует путь для сохранения файла", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             Parameters.CurrentURI = Parameters.AppURI;

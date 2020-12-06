@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace LimFTPClient
 {
@@ -26,17 +27,17 @@ namespace LimFTPClient
 				}
 				else
 				{
-					DialogResult Result = MessageBox.Show("Такая папка не сушествует.\nСоздать?", "Предупреждение",MessageBoxButtons.YesNo);
+					DialogResult Result = MessageBox.Show("Такая папка не существует.\nСоздать?", "Предупреждение",MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 					
 					if (Result == DialogResult.Yes)
 					{
-						Directory.CreateDirectory(DownloadPathBox.Text)
+                        Directory.CreateDirectory(DownloadPathBox.Text);
 					}
 				}
             }
             else
             {
-                MessageBox.Show("Путь не может быть пустым", "Предупреждение");
+                MessageBox.Show("Путь не может быть пустым", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

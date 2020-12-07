@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,6 +39,13 @@ namespace LimFTPClient
                 {
                     await Task.Run(() => FTP.DownloadFile(Parameters.CurrentURI, Parameters.DownloadPath + "\\" + FileName));
                     label1.Text = "Успешно загружено";
+
+                    DialogResult Result = MessageBox.Show("Распаковать пакет?", "Успешно загружено", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (Result == DialogResult.Yes)
+                    {
+                        ZipFile.ExtractToDirectory(Parameters.DownloadPath + "\\" + FileName, Parameters.DownloadPath + "\\" + AppName);
+                    }
                 }
                 catch (WebException)
                 {

@@ -17,7 +17,7 @@ namespace LimFTPClient
             this.Text = String.Format("О программе {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Версия {0}", AssemblyVersion);
-            this.labelCopyright.Text = String.Format("Сборка от {0}", "06.12.20");
+            this.labelCopyright.Text = String.Format("Сборка от {0}", "08.12.20");
             this.labelCompanyName.Text = String.Format("Автор {0} <{1}>", AssemblyCompany, "Limowski256@gmail.com");
             this.textBoxDescription.Text = AssemblyDescription;
         }

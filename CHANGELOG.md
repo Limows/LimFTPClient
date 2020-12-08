@@ -1,5 +1,21 @@
 # Changelog
 
+## [v0.3.0] - (08.12.20)
+
+### Added
+
+ - Unzip function
+
+### Changed
+
+ - Formatting error messages
+
+### Fixed
+
+ -  DirectoryNotFoundException
+ - WebException
+ - UI and some code refactored
+
 ## [v0.2.0] - (05.12.20)
 
 ### Added

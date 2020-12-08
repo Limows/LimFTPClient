@@ -102,11 +102,6 @@ namespace LimFTPClient
         }
         #endregion
 
-        private void labelVersion_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void okButton_Click(object sender, EventArgs e)
         {
             Close();

@@ -28,6 +28,8 @@ namespace LimFTPClient
             Stream FTPReader = CreateDownloadRequest(URI);
             FileStream outputStream;
 
+            //FTPReader.Close();
+
             try
             {
                 outputStream = new FileStream(FilePath, FileMode.Create);
@@ -37,8 +39,9 @@ namespace LimFTPClient
                 FTPReader.Dispose();
                 FTPReader.Close();
 
-                throw new IOException();
+                throw;
             }
+
             int bufferSize = 1024;
             int readCount;
             byte[] buffer = new byte[bufferSize];

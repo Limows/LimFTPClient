@@ -47,12 +47,19 @@ namespace LimFTPClient
                         ZipFile.ExtractToDirectory(Parameters.DownloadPath + "\\" + FileName, Parameters.DownloadPath + "\\" + AppName);
                     }
                 }
-                catch (WebException)
+                catch (WebException Exception)
                 {
-                    File.Delete(Parameters.DownloadPath + "\\" + FileName);
+                    if ((int)((FtpWebResponse)Exception.Response).StatusCode == 500)
+                    {
+                        File.Delete(Parameters.DownloadPath + "\\" + FileName);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Невозможно сохранить в " + Parameters.DownloadPath + "\nВозможно программа должна быть\nзапущена от имени администратора", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                     label1.Text = "Загрузка не удалась";
                 }
-                catch (IOException)
+                catch (UnauthorizedAccessException)
                 {
                     MessageBox.Show("Невозможно сохранить в " + Parameters.DownloadPath + "\nВозможно программа должна быть\nзапущена от имени администратора", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     label1.Text = "Загрузка не удалась";

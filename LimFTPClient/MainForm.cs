@@ -40,9 +40,12 @@ namespace LimFTPClient
         private void SystemsBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             label1.Text = "Выберите нужное приложение";
+            string UriAdd = SystemsBox.Text.Replace(" ", "_");
+
             if (Parameters.CurrentURI == Parameters.ServerURI)
             {   
-                Parameters.SystemURI = new Uri(Parameters.ServerURI, SystemsBox.Text);
+                
+                Parameters.SystemURI = new Uri(Parameters.ServerURI, UriAdd);
                 Parameters.CurrentURI = Parameters.SystemURI;
                 //MessageBox.Show(Parameters.CurrentURI.ToString());
 

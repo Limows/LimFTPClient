@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.3.5] - (10.01.21)
+
+### Added
+
+### Changed
+
+ - App page UI
+
+### Fixed
+
+ - Error with space in system name
+
 ## [v0.3.0] - (08.12.20)
 
 ### Added

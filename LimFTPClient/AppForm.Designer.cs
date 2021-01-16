@@ -45,6 +45,9 @@
             // 
             // DownloadButton
             // 
+            this.DownloadButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.DownloadButton.Cursor = System.Windows.Forms.Cursors.Default;
+            this.DownloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.DownloadButton.Font = new System.Drawing.Font("Book Antiqua", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DownloadButton.Location = new System.Drawing.Point(12, 82);
             this.DownloadButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -52,7 +55,7 @@
             this.DownloadButton.Size = new System.Drawing.Size(88, 27);
             this.DownloadButton.TabIndex = 0;
             this.DownloadButton.Text = "Скачать";
-            this.DownloadButton.UseVisualStyleBackColor = true;
+            this.DownloadButton.UseVisualStyleBackColor = false;
             this.DownloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
             // 
             // AboutAppBox
@@ -133,7 +136,7 @@
             // Label
             // 
             this.Label.AutoSize = true;
-            this.Label.Location = new System.Drawing.Point(123, 88);
+            this.Label.Location = new System.Drawing.Point(117, 88);
             this.Label.Name = "Label";
             this.Label.Size = new System.Drawing.Size(43, 15);
             this.Label.TabIndex = 10;

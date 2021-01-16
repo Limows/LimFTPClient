@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.3.5] - (10.01.21)
+
+### Added
+
+### Changed
+
+ - App page UI
+ - Net Framework to Net Core
+
+### Fixed
+
+ - Error with space in system name
+
 ## [v0.3.0] - (08.12.20)
 
 ### Added
@@ -64,7 +77,9 @@
 ## [v0.1.0] - (03.12.20)
 
  - First release.
- 
+
+[v0.3.5]: https://github.com/Limows/LimFTPClient/releases/tag/v0.3.5
+[v0.3.0]: https://github.com/Limows/LimFTPClient/releases/tag/v0.3.0
 [v0.2.0]: https://github.com/Limows/LimFTPClient/releases/tag/v0.2
 [v0.1.2]: https://github.com/Limows/LimFTPClient/releases/tag/v0.1.2
 [v0.1.1]: https://github.com/Limows/LimFTPClient/releases/tag/v0.1.1

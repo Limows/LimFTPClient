@@ -50,7 +50,7 @@
             this.SystemsBox.BackColor = System.Drawing.SystemColors.Window;
             this.SystemsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.SystemsBox.Cursor = System.Windows.Forms.Cursors.Default;
-            this.SystemsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.SystemsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SystemsBox.FormattingEnabled = true;
             this.SystemsBox.ItemHeight = 16;
             this.SystemsBox.Location = new System.Drawing.Point(0, 55);
@@ -63,7 +63,7 @@
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.Location = new System.Drawing.Point(276, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(183, 27);
@@ -75,7 +75,8 @@
             // BackButton
             // 
             this.BackButton.BackColor = System.Drawing.SystemColors.Window;
-            this.BackButton.BackgroundImage = global::LimFTPClient.Properties.Resources.BackButton;
+            this.BackButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.BackButton.Image = ((System.Drawing.Image)(resources.GetObject("BackButton.Image")));
             this.BackButton.Location = new System.Drawing.Point(-1, 24);
             this.BackButton.Name = "BackButton";
             this.BackButton.Size = new System.Drawing.Size(30, 30);
@@ -144,7 +145,7 @@
             // SearchBox
             // 
             this.SearchBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.SearchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.SearchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SearchBox.Location = new System.Drawing.Point(33, 27);
             this.SearchBox.Name = "SearchBox";
             this.SearchBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
@@ -164,10 +165,11 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.SystemsBox);
             this.Controls.Add(this.menuStrip1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "LimFTP Client";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);

@@ -34,11 +34,11 @@ namespace LimFTPClient
 
             if (Parameters.DownloadPath != null)
             {
-                label1.Text = "Загрузка " + AppName + " в папку " + Parameters.DownloadPath;
+                Label.Text = "Загрузка в папку " + Parameters.DownloadPath;
                 try
                 {
                     await Task.Run(() => FTP.DownloadFile(Parameters.CurrentURI, Parameters.DownloadPath + "\\" + FileName));
-                    label1.Text = "Успешно загружено";
+                    Label.Text = "Успешно загружено";
 
                     DialogResult Result = MessageBox.Show("Распаковать пакет?", "Сообщение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -49,7 +49,7 @@ namespace LimFTPClient
                 }
                 catch (WebException Exception)
                 {
-                    if ((int)((FtpWebResponse)Exception.Response).StatusCode == 500)
+                    if ((int)((FtpWebResponse)Exception.Response).StatusCode == 550)
                     {
                         File.Delete(Parameters.DownloadPath + "\\" + FileName);
                     }
@@ -57,12 +57,12 @@ namespace LimFTPClient
                     {
                         MessageBox.Show("Невозможно сохранить в " + Parameters.DownloadPath + "\nВозможно программа должна быть\nзапущена от имени администратора", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    label1.Text = "Загрузка не удалась";
+                    Label.Text = "Загрузка не удалась";
                 }
                 catch (UnauthorizedAccessException)
                 {
                     MessageBox.Show("Невозможно сохранить в " + Parameters.DownloadPath + "\nВозможно программа должна быть\nзапущена от имени администратора", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    label1.Text = "Загрузка не удалась";
+                    Label.Text = "Загрузка не удалась";
                 }
 
 
@@ -79,16 +79,21 @@ namespace LimFTPClient
         {
             this.Text = AppName;
             string InfoFileName = AppName + ".info";
+            NameLabel.Text = AppName;
+            Label.Text = "";
+
             Parameters.CurrentURI = new Uri(Parameters.AppURI.ToString() + "/" + InfoFileName);
+
             try
             {
-                AboutAppBox.Text = FTP.LoadInfo(Parameters.CurrentURI);             
+                AboutAppBox.Text = FTP.LoadInfo(Parameters.CurrentURI);            
             }
             catch
             {
                 AboutAppBox.Text = "Для этого приложения ещё нет описания";
             }
             Parameters.CurrentURI = Parameters.AppURI;
+
 
         }
 

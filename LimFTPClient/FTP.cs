@@ -96,7 +96,7 @@ namespace LimFTPClient
             StreamReader FTPReader = new StreamReader(CreateListingRequest(URI));
             List<string> SystemsList = new List<string>();
 
-            string line = FTPReader.ReadLine();
+            string line = FTPReader.ReadLine().Replace("_", " ");
             while (!string.IsNullOrEmpty(line))
             {
                 if (line.IndexOf('.') != -1)
@@ -111,7 +111,14 @@ namespace LimFTPClient
                     SystemsList.Add(line);
                 }
 
-                line = FTPReader.ReadLine();
+                try
+                {
+                    line = FTPReader.ReadLine().Replace("_", " ");
+                }
+                catch
+                {
+                    line = "";
+                }
             }
 
             FTPReader.Dispose();

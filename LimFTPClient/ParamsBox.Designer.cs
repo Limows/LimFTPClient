@@ -36,25 +36,28 @@
             // 
             // DownloadPathBox
             // 
-            this.DownloadPathBox.Location = new System.Drawing.Point(98, 186);
+            this.DownloadPathBox.Location = new System.Drawing.Point(114, 215);
+            this.DownloadPathBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.DownloadPathBox.Name = "DownloadPathBox";
-            this.DownloadPathBox.Size = new System.Drawing.Size(168, 20);
+            this.DownloadPathBox.Size = new System.Drawing.Size(195, 23);
             this.DownloadPathBox.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 188);
+            this.label1.Location = new System.Drawing.Point(14, 217);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
+            this.label1.Size = new System.Drawing.Size(83, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "Путь загрузки";
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(137, 365);
+            this.SaveButton.Location = new System.Drawing.Point(162, 423);
+            this.SaveButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.Size = new System.Drawing.Size(88, 27);
             this.SaveButton.TabIndex = 2;
             this.SaveButton.Text = "Сохранить";
             this.SaveButton.UseVisualStyleBackColor = true;
@@ -62,9 +65,10 @@
             // 
             // OpenDirButton
             // 
-            this.OpenDirButton.Location = new System.Drawing.Point(273, 185);
+            this.OpenDirButton.Location = new System.Drawing.Point(318, 213);
+            this.OpenDirButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.OpenDirButton.Name = "OpenDirButton";
-            this.OpenDirButton.Size = new System.Drawing.Size(75, 23);
+            this.OpenDirButton.Size = new System.Drawing.Size(88, 27);
             this.OpenDirButton.TabIndex = 3;
             this.OpenDirButton.Text = "Обзор";
             this.OpenDirButton.UseVisualStyleBackColor = true;
@@ -72,16 +76,17 @@
             // 
             // ParamsBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(366, 400);
+            this.ClientSize = new System.Drawing.Size(427, 462);
             this.ControlBox = false;
             this.Controls.Add(this.OpenDirButton);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DownloadPathBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ParamsBox";

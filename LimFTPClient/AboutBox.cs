@@ -17,7 +17,7 @@ namespace LimFTPClient
             this.Text = String.Format("О программе {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = String.Format("Версия {0}", AssemblyVersion);
-            this.labelCopyright.Text = String.Format("Сборка от {0}", "10.01.21");
+            this.labelCopyright.Text = String.Format("Сборка от {0}", AssemblyBuildDate);
             this.labelCompanyName.Text = String.Format("Автор {0} <{1}>", AssemblyCompany, "Limowski256@gmail.com");
             this.textBoxDescription.Text = AssemblyDescription;
         }
@@ -46,6 +46,14 @@ namespace LimFTPClient
             get
             {
                 return Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            }
+        }
+
+        public string AssemblyBuildDate
+        {
+            get
+            {
+                return System.IO.File.GetLastWriteTime(Application.ExecutablePath).ToString("dd.MM.yy");
             }
         }
 

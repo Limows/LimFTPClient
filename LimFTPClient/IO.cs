@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
+using System.Reflection;
 using System.IO;
 
 namespace LimFTPClient
@@ -11,18 +12,32 @@ namespace LimFTPClient
     {
         static public void LoadParameters()
         {
+            if (Parameters.ConfigPath == "")
+            {
+                Parameters.ConfigPath = IO.GetCurrentDirectory();
+            }
+
             FileInfo ConfigFile = new FileInfo(Parameters.ConfigPath);
 
             BinaryReader Reader = new BinaryReader(ConfigFile.OpenRead());
 
             Parameters.DownloadPath = Reader.ReadString();
 
-            Reader.Dispose();
             Reader.Close();
+        }
+
+        static public string GetCurrentDirectory()
+        {
+            return Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase) + "\\Default.cfg";
         }
 
         static public void SaveParameters()
         {
+            if (Parameters.ConfigPath == "")
+            {
+                Parameters.ConfigPath = IO.GetCurrentDirectory();
+            }
+
             FileInfo ConfigFile = new FileInfo(Parameters.ConfigPath);
 
             if (Parameters.DownloadPath != null)
@@ -35,16 +50,18 @@ namespace LimFTPClient
                 }
                 else Writer = new BinaryWriter(ConfigFile.Open(FileMode.Open));
 
-
                 Writer.Write(Parameters.DownloadPath);
 
-                Writer.Dispose();
                 Writer.Close();
             }
         }
 
         static public void RemoveParameters()
         {
+            if (Parameters.ConfigPath == "")
+            {
+                Parameters.ConfigPath = IO.GetCurrentDirectory();
+            }
 
             File.Delete(Parameters.ConfigPath);
 

@@ -45,6 +45,7 @@ namespace LimFTPClient
                     if (Result == DialogResult.Yes)
                     {
                         ZipFile.ExtractToDirectory(Parameters.DownloadPath + "\\" + FileName, Parameters.DownloadPath + "\\" + AppName);
+                        //IO.ExtractToDirectory(Parameters.DownloadPath + "\\" + FileName, Parameters.DownloadPath + "\\" + AppName);
                     }
                 }
                 catch (WebException Exception)

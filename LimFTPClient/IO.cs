@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Reflection;
 using System.IO;
+using System.IO.Compression;
 
 namespace LimFTPClient
 {
@@ -53,6 +54,38 @@ namespace LimFTPClient
                 Writer.Write(Parameters.DownloadPath);
 
                 Writer.Close();
+            }
+        }
+
+        public static void ExtractToDirectory(string CompressedFilePath, string ExtractedFilePath)
+        {
+            FileInfo fileToDecompress = new FileInfo(CompressedFilePath);
+
+            using (FileStream originalFileStream = fileToDecompress.OpenRead())
+            {
+                //string currentFileName = fileToDecompress.FullName;
+                string newFileName = ExtractedFilePath;
+
+                using (FileStream decompressedFileStream = File.Create(newFileName))
+                {
+                    using (GZipStream decompressionStream = new GZipStream(originalFileStream, CompressionMode.Decompress))
+                    {
+                        //decompressionStream.CopyTo(decompressedFileStream);
+                        CopyTo(decompressionStream, decompressedFileStream, 8192);
+                        //Console.WriteLine($"Decompressed: {fileToDecompress.Name}");
+                    }
+                }
+            }
+        }
+
+        private static void CopyTo(Stream source, Stream destination, int bufferSize)
+        {
+            byte[] array = new byte[bufferSize];
+            int count;
+
+            while ((count = source.Read(array, 0, array.Length)) != 0)
+            {
+                destination.Write(array, 0, count);
             }
         }
 

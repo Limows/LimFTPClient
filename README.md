@@ -1,5 +1,5 @@
 # LimFTPClient
-Small client app for my FTP server
+Small client app for my FTP server (Windows version)
 
 ## Assembly
 

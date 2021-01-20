@@ -4,9 +4,10 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <Version>0.3.5</Version>
+    <Version>0.3.7</Version>
     <Description>Small client for Limows' FTP server</Description>
-    <AssemblyVersion>0.3.5.0</AssemblyVersion>
+    <AssemblyVersion>0.3.7.0</AssemblyVersion>
+    <Company>Limows</Company>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

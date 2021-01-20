@@ -10,7 +10,9 @@ You need the following things to build this program:
 
 ## Supported functions
 
- - Selecting OS (Only in Windows version)
+ - Selecting OS
+ - Selecting App for OS
+ - App page contains Description, logo and screenshot (not working yet)
  - Downloading application package
  - Unziping downloaded package
 

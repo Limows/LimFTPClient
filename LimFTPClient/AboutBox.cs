@@ -53,7 +53,8 @@ namespace LimFTPClient
         {
             get
             {
-                //return System.IO.File.GetLastWriteTime(Application.ExecutablePath).ToString("dd.MM.yy");
+                return System.IO.File.GetLastWriteTime(Application.ExecutablePath).ToString("dd.MM.yy");
+                /*
                 string filePath = Application.ExecutablePath;
                 const int c_PeHeaderOffset = 60;
                 const int c_LinkerTimestampOffset = 8;
@@ -79,6 +80,7 @@ namespace LimFTPClient
                 dt = dt.AddSeconds(secondsSince1970);
                 dt = dt.AddHours(TimeZone.CurrentTimeZone.GetUtcOffset(dt).Hours);
                 return dt.ToString("dd.MM.yy");
+                */
             }
         }
 

@@ -1,5 +1,21 @@
 # Changelog
 
+## [v0.3.7] - (20.01.21)
+
+### Added
+
+ - Gzip lib for testing
+ 
+### Changed 
+
+ - Version synchronization with WinMobile port
+ - IO class improved
+ - AboutBox improved with AssemblyBuildDate property
+ 
+### Fixed
+
+ - Minor errors
+
 ## [v0.3.5] - (10.01.21)
 
 ### Added

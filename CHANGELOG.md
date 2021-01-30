@@ -94,6 +94,7 @@
 
  - First release.
 
+[v0.3.7]: https://github.com/Limows/LimFTPClient/releases/tag/v0.3.7
 [v0.3.5]: https://github.com/Limows/LimFTPClient/releases/tag/v0.3.5
 [v0.3.0]: https://github.com/Limows/LimFTPClient/releases/tag/v0.3.0
 [v0.2.0]: https://github.com/Limows/LimFTPClient/releases/tag/v0.2

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.IO;
@@ -52,7 +53,7 @@ namespace WinMobileNetCFExt.About
             get
             {
                 //return File.GetCreationTime(Assembly.GetExecutingAssembly().GetName().CodeBase).ToString("dd.MM.yy");
-                string filePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                string filePath = System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase;
                 const int c_PeHeaderOffset = 60;
                 const int c_LinkerTimestampOffset = 8;
                 byte[] b = new byte[2048];

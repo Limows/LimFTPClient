@@ -6,10 +6,9 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using System.IO.Compression;
 using System.Net;
 using System.Threading;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace LimFTPClient
 {
@@ -22,86 +21,228 @@ namespace LimFTPClient
             InitializeComponent();
 
             AppName = CurrentAppName;
+
+            DownloadingTimer.Enabled = false;
+            DownloadingTimer.Interval = 100;
+
+            if (this.Width == 480)
+            {
+                LogoBox.Width = 100;
+                LogoBox.Height = 100;
+            }
         }
 
-
-
-        private async void DownloadButton_Click(object sender, EventArgs e)
+        private void DownloadButton_Click(object sender, EventArgs e)
         {
-            string FileName = AppName + ".zip";
-            Parameters.CurrentURI = new Uri(Parameters.AppURI.ToString() + "/" + FileName);
-            //MessageBox.Show(Parameters.CurrentURI.ToString());
+            ParamsHelper.CurrentURI = ParamsHelper.AppURI;
 
-            if (Parameters.DownloadPath != null)
+            if (!String.IsNullOrEmpty(ParamsHelper.DownloadPath))
             {
-                Label.Text = "Загрузка в папку " + Parameters.DownloadPath;
-                try
-                {
-                    await Task.Run(() => FTP.DownloadFile(Parameters.CurrentURI, Parameters.DownloadPath + "\\" + FileName));
-                    Label.Text = "Успешно загружено";
+                ThreadStart DownloadingStarter = delegate { DownloadingThreadWorker(ParamsHelper.CurrentURI, ParamsHelper.DownloadPath, ParamsHelper.InstallPath, AppName);  };
+                Thread DownloadingThread = new Thread(DownloadingStarter);
+                ParamsHelper.IsThreadAlive = true;
+                ParamsHelper.IsThreadError = false;
 
-                    DialogResult Result = MessageBox.Show("Распаковать пакет?", "Сообщение", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DownloadingThread.Start();
 
-                    if (Result == DialogResult.Yes)
-                    {
-                        ZipFile.ExtractToDirectory(Parameters.DownloadPath + "\\" + FileName, Parameters.DownloadPath + "\\" + AppName);
-                        //IO.ExtractToDirectory(Parameters.DownloadPath + "\\" + FileName, Parameters.DownloadPath + "\\" + AppName);
-                    }
-                }
-                catch (WebException Exception)
-                {
-                    if ((int)((FtpWebResponse)Exception.Response).StatusCode == 550)
-                    {
-                        File.Delete(Parameters.DownloadPath + "\\" + FileName);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Невозможно сохранить в " + Parameters.DownloadPath + "\nВозможно программа должна быть\nзапущена от имени администратора", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    Label.Text = "Загрузка не удалась";
-                }
-                catch (UnauthorizedAccessException)
-                {
-                    MessageBox.Show("Невозможно сохранить в " + Parameters.DownloadPath + "\nВозможно программа должна быть\nзапущена от имени администратора", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Label.Text = "Загрузка не удалась";
-                }
+                StatusLabel.Text = ParamsHelper.ThreadMessage;
 
-
+                DownloadingTimer.Enabled = true;
+                DownloadButton.Enabled = false;
             }
             else
             {
-                MessageBox.Show("Отсутствует путь для сохранения файла", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Отсутствует путь для сохранения файла", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
             }
 
-            Parameters.CurrentURI = Parameters.AppURI;
         }
 
         private void AppForm_Load(object sender, EventArgs e)
         {
-            this.Text = AppName;
-            string InfoFileName = AppName + ".info";
-            NameLabel.Text = AppName;
-            Label.Text = "";
+            this.Text = AppName.Replace("_", " ");
+            //string InfoFileName = AppName + ".info";
+            NameLabel.Text = AppName.Replace("_", " ");
+            StatusLabel.Text = "";
 
-            Parameters.CurrentURI = new Uri(Parameters.AppURI.ToString() + "/" + InfoFileName);
+            ParamsHelper.CurrentURI = ParamsHelper.AppURI;
+
+            //ThreadStart AppStarter = delegate { FTPHelper.ReadListing(ParamsHelper.CurrentURI); };
+            //Thread ListingThread = new Thread(ListingStarter);
+            //ListingThread.Start();
+            //ParamsHelper.IsThreadAlive = true;
 
             try
             {
-                AboutAppBox.Text = FTP.LoadInfo(Parameters.CurrentURI);            
+                //AboutAppBox.Text = FTPHelper.LoadInfo(ParamsHelper.CurrentURI);
+                SizeLabel.Text = NetHelper.LoadInfo(ParamsHelper.CurrentURI, AppName);
             }
             catch
             {
-                AboutAppBox.Text = "Для этого приложения ещё нет описания";
+                SizeLabel.Text = "0 МБ";
             }
-            Parameters.CurrentURI = Parameters.AppURI;
 
+            AboutAppBox.Text = "Для этого приложения ещё нет описания";
 
+            ParamsHelper.CurrentURI = ParamsHelper.AppURI;
+
+            Cursor.Current = Cursors.Default;
         }
 
-        private void AppForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void AppForm_FormClosing(object sender, CancelEventArgs e)
         {
-            Parameters.CurrentURI = Parameters.SystemURI;
-            //MessageBox.Show(Parameters.CurrentURI.ToString());
+            ParamsHelper.CurrentURI = ParamsHelper.SystemURI;
+        }
+
+        private void DownloadingThreadWorker(Uri CurrentURI, string DownloadPath, string InstallPath, string AppName)
+        {   
+            string FileName = AppName + ".zip";
+            bool IsInstalled = false;
+
+            ParamsHelper.ThreadMessage = "Идёт загрузка";
+
+            try
+            {
+                NetHelper.DownloadFile(CurrentURI, DownloadPath, FileName);
+            }
+            catch(Exception NewEx)
+            {
+                ParamsHelper.ThreadException = NewEx;
+                ParamsHelper.IsThreadAlive = false;
+                ParamsHelper.IsThreadError = true;
+                ParamsHelper.ThreadMessage = "Ошибка при загрузке";
+                return;
+            }
+
+            ParamsHelper.IsThreadWaiting = true;
+            ParamsHelper.ThreadMessage = "Успешно загружено";
+
+            while (ParamsHelper.IsThreadWaiting)
+            {
+
+            }
+
+            if (ParamsHelper.ThreadMessage == "Yes")
+            {   
+                ParamsHelper.ThreadMessage = "Идёт распаковка";
+
+                string ExtractedPath;
+
+                try
+                {
+                    ExtractedPath = IO.ExtractToDirectory(DownloadPath + "\\" + FileName, DownloadPath + "\\" + AppName);
+                }
+                catch(Exception NewEx)
+                {
+                    ParamsHelper.ThreadException = NewEx;
+                    ParamsHelper.IsThreadAlive = false;
+                    ParamsHelper.IsThreadError = true;
+                    ParamsHelper.ThreadMessage = "Ошибка при распаковке";
+                    return;
+                }
+
+                ParamsHelper.ThreadMessage = "Успешно распаковано";
+
+                if (!String.IsNullOrEmpty(InstallPath))
+                {   
+                    ParamsHelper.ThreadMessage = "Идёт установка";
+
+                    try
+                    {
+                        IsInstalled = Sys.AppInstall(ExtractedPath, InstallPath, AppName, ParamsHelper.IsOverwrite);
+                    }
+                    catch(Exception NewEx)
+                    {
+                        ParamsHelper.ThreadException = NewEx;
+                        ParamsHelper.IsThreadAlive = false;
+                        ParamsHelper.IsThreadError = true;
+                        ParamsHelper.ThreadMessage = "Ошибка при установке";
+                        return;  
+                    }
+
+                    if (IsInstalled) ParamsHelper.ThreadMessage = "Успешно установлено";
+                    else ParamsHelper.ThreadMessage = "Ошибка при установке";
+                }
+                else
+                {
+                    ParamsHelper.ThreadException = new Exception("InstallPath Empty");
+                    ParamsHelper.IsThreadAlive = false;
+                    ParamsHelper.IsThreadError = true;
+                    ParamsHelper.ThreadMessage = "Ошибка при установке";
+                    return;  
+                }
+
+            }
+
+            ParamsHelper.CurrentURI = ParamsHelper.AppURI;
+            ParamsHelper.IsThreadAlive = false;
+        }
+
+        private void DownloadingTimer_Tick(object sender, EventArgs e)
+        {
+            if (!ParamsHelper.IsThreadAlive)
+            {
+                DownloadingTimer.Enabled = false;
+                DownloadButton.Enabled = true;
+                StatusLabel.Text = ParamsHelper.ThreadMessage;
+
+                if (ParamsHelper.IsThreadError)
+                {
+                    try
+                    {
+                        throw ParamsHelper.ThreadException;
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                        MessageBox.Show("Невозможно сохранить в " + ParamsHelper.DownloadPath + "\nВозможно программа должна быть\nзапущена от имени администратора", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
+                    }
+                    catch (IOException)
+                    {
+                        MessageBox.Show("Невозможно сохранить в " + ParamsHelper.DownloadPath + "\nВыберите другую директорию", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
+                    }
+                    catch (WebException)
+                    {
+                        MessageBox.Show("Невозможно подключиться к серверу", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
+                    }
+                    catch (Exception NewEx)
+                    {
+                        if (NewEx.Message == "InstallPath Empty")
+                        {
+                            MessageBox.Show("Отсутствует путь для установки", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Ошибка при установке", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
+                        }
+                    }
+
+                }
+
+            }
+            else
+            {
+                StatusLabel.Text = ParamsHelper.ThreadMessage;
+
+                if (ParamsHelper.IsThreadWaiting)
+                {
+                    DownloadingTimer.Enabled = false;
+                    if (!ParamsHelper.IsAutoInstall)
+                    {
+                        DialogResult Result = MessageBox.Show("Установить?", "Сообщение", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+                        if (Result == DialogResult.Yes)
+                        {
+                            ParamsHelper.ThreadMessage = "Yes";
+                        }
+                    }
+                    else
+                    {
+                        ParamsHelper.ThreadMessage = "Yes";
+                    }
+
+                    DownloadingTimer.Enabled = true;
+                    ParamsHelper.IsThreadWaiting = false;
+                }
+            }             
         }
     }
 }

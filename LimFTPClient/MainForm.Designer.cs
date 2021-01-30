@@ -3,14 +3,15 @@
     partial class MainForm
     {
         /// <summary>
-        /// Обязательная переменная конструктора.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.MainMenu MainMenu;
 
         /// <summary>
-        /// Освободить все используемые ресурсы.
+        /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,182 +21,270 @@
             base.Dispose(disposing);
         }
 
-        #region Код, автоматически созданный конструктором форм Windows
+        #region Windows Form Designer generated code
 
         /// <summary>
-        /// Требуемый метод для поддержки конструктора — не изменяйте 
-        /// содержимое этого метода с помощью редактора кода.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.SystemsBox = new System.Windows.Forms.ListBox();
+            this.MainMenu = new System.Windows.Forms.MainMenu(this.components);
+            this.ActionsMenuItem = new System.Windows.Forms.MenuItem();
+            this.ParamsMenuItem = new System.Windows.Forms.MenuItem();
+            this.UpdateMenuItem = new System.Windows.Forms.MenuItem();
+            this.RegisterMenuItem = new System.Windows.Forms.MenuItem();
+            this.RefMenu = new System.Windows.Forms.MenuItem();
+            this.HelpMenuItem = new System.Windows.Forms.MenuItem();
+            this.AboutMenuItem = new System.Windows.Forms.MenuItem();
+            this.UpdateSysMenuItem = new System.Windows.Forms.MenuItem();
+            this.TabControl = new System.Windows.Forms.TabControl();
+            this.NewPage = new System.Windows.Forms.TabPage();
+            this.AppsBox = new System.Windows.Forms.ListBox();
+            this.SearchBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.BackButton = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.ParamsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.ConnectionStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.SearchBox = new System.Windows.Forms.RichTextBox();
-            this.menuStrip1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.InstalledPage = new System.Windows.Forms.TabPage();
+            this.InstalledLabel = new System.Windows.Forms.Label();
+            this.PropButton = new System.Windows.Forms.Button();
+            this.DeleteButton = new System.Windows.Forms.Button();
+            this.MemLabel = new System.Windows.Forms.Label();
+            this.FreeMemLabel = new System.Windows.Forms.Label();
+            this.InstalledBox = new System.Windows.Forms.ListBox();
+            this.ListingThreadTimer = new System.Windows.Forms.Timer(this.components);
+            this.TabControl.SuspendLayout();
+            this.NewPage.SuspendLayout();
+            this.InstalledPage.SuspendLayout();
             this.SuspendLayout();
             // 
-            // SystemsBox
+            // MainMenu
             // 
-            this.SystemsBox.BackColor = System.Drawing.SystemColors.Window;
-            this.SystemsBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.SystemsBox.Cursor = System.Windows.Forms.Cursors.Default;
-            this.SystemsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.SystemsBox.FormattingEnabled = true;
-            this.SystemsBox.ItemHeight = 16;
-            this.SystemsBox.Location = new System.Drawing.Point(0, 55);
-            this.SystemsBox.Name = "SystemsBox";
-            this.SystemsBox.Size = new System.Drawing.Size(460, 384);
-            this.SystemsBox.TabIndex = 0;
-            this.SystemsBox.Click += new System.EventHandler(this.SystemsBox_Click);
-            this.SystemsBox.SelectedIndexChanged += new System.EventHandler(this.SystemsBox_SelectedIndexChanged);
-            this.SystemsBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.SystemsBox_MouseDoubleClick);
+            this.MainMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.ActionsMenuItem,
+            this.RefMenu});
             // 
-            // label1
+            // ActionsMenuItem
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(276, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(183, 27);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Выберите нужную систему";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.ActionsMenuItem.Index = 0;
+            this.ActionsMenuItem.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.ParamsMenuItem,
+            this.UpdateMenuItem,
+            this.RegisterMenuItem});
+            this.ActionsMenuItem.Text = "Действия";
             // 
-            // BackButton
+            // ParamsMenuItem
             // 
-            this.BackButton.BackColor = System.Drawing.SystemColors.Window;
-            this.BackButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.BackButton.Image = ((System.Drawing.Image)(resources.GetObject("BackButton.Image")));
-            this.BackButton.Location = new System.Drawing.Point(-1, 24);
-            this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(30, 30);
-            this.BackButton.TabIndex = 2;
-            this.BackButton.UseVisualStyleBackColor = false;
-            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            this.ParamsMenuItem.Index = 0;
+            this.ParamsMenuItem.Text = "Параметры";
+            this.ParamsMenuItem.Click += new System.EventHandler(this.ParamsMenuItem_Click);
             // 
-            // menuStrip1
+            // UpdateMenuItem
             // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ParamsToolStripMenuItem,
-            this.справкаToolStripMenuItem,
-            this.AboutToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(459, 24);
-            this.menuStrip1.TabIndex = 3;
-            this.menuStrip1.Text = "menuStrip1";
+            this.UpdateMenuItem.Index = 1;
+            this.UpdateMenuItem.Text = "Обновить";
+            this.UpdateMenuItem.Click += new System.EventHandler(this.BackMenuItem_Click);
             // 
-            // ParamsToolStripMenuItem
+            // RegisterMenuItem
             // 
-            this.ParamsToolStripMenuItem.Name = "ParamsToolStripMenuItem";
-            this.ParamsToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
-            this.ParamsToolStripMenuItem.Text = "Параметры";
-            this.ParamsToolStripMenuItem.Click += new System.EventHandler(this.ParamsToolStripMenuItem_Click);
+            this.RegisterMenuItem.Index = 2;
+            this.RegisterMenuItem.Text = "Регистрация";
+            this.RegisterMenuItem.Click += new System.EventHandler(this.RegisterMenuItem_Click);
             // 
-            // справкаToolStripMenuItem
+            // RefMenu
             // 
-            this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.справкаToolStripMenuItem.Text = "Справка";
-            this.справкаToolStripMenuItem.Click += new System.EventHandler(this.справкаToolStripMenuItem_Click);
+            this.RefMenu.Index = 1;
+            this.RefMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.HelpMenuItem,
+            this.AboutMenuItem,
+            this.UpdateSysMenuItem});
+            this.RefMenu.Text = "Справка";
             // 
-            // AboutToolStripMenuItem
+            // HelpMenuItem
             // 
-            this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
-            this.AboutToolStripMenuItem.Text = "О программе";
-            this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
+            this.HelpMenuItem.Index = 0;
+            this.HelpMenuItem.Text = "Помощь";
+            this.HelpMenuItem.Click += new System.EventHandler(this.HelpMenuItem_Click);
             // 
-            // contextMenuStrip1
+            // AboutMenuItem
             // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.AboutMenuItem.Index = 1;
+            this.AboutMenuItem.Text = "О программе";
+            this.AboutMenuItem.Click += new System.EventHandler(this.AboutMenuItem_Click);
             // 
-            // statusStrip1
+            // UpdateSysMenuItem
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ConnectionStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 441);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(459, 22);
-            this.statusStrip1.TabIndex = 5;
-            this.statusStrip1.Text = "StatusStrip";
-            this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);
+            this.UpdateSysMenuItem.Index = 2;
+            this.UpdateSysMenuItem.Text = "Обновления";
+            this.UpdateSysMenuItem.Click += new System.EventHandler(this.UpdateSysMenuItem_Click);
             // 
-            // ConnectionStatusLabel
+            // TabControl
             // 
-            this.ConnectionStatusLabel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ConnectionStatusLabel.Name = "ConnectionStatusLabel";
-            this.ConnectionStatusLabel.Size = new System.Drawing.Size(45, 17);
-            this.ConnectionStatusLabel.Text = "Default";
-            this.ConnectionStatusLabel.Click += new System.EventHandler(this.toolStripStatusLabel1_Click);
+            this.TabControl.Controls.Add(this.NewPage);
+            this.TabControl.Controls.Add(this.InstalledPage);
+            this.TabControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TabControl.Location = new System.Drawing.Point(0, 0);
+            this.TabControl.Name = "TabControl";
+            this.TabControl.SelectedIndex = 0;
+            this.TabControl.Size = new System.Drawing.Size(250, 305);
+            this.TabControl.TabIndex = 7;
+            this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
+            // 
+            // NewPage
+            // 
+            this.NewPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.NewPage.Controls.Add(this.AppsBox);
+            this.NewPage.Controls.Add(this.SearchBox);
+            this.NewPage.Controls.Add(this.label1);
+            this.NewPage.Location = new System.Drawing.Point(4, 22);
+            this.NewPage.Name = "NewPage";
+            this.NewPage.Size = new System.Drawing.Size(242, 279);
+            this.NewPage.TabIndex = 0;
+            this.NewPage.Text = "Приложения";
+            // 
+            // AppsBox
+            // 
+            this.AppsBox.Location = new System.Drawing.Point(0, 18);
+            this.AppsBox.Name = "AppsBox";
+            this.AppsBox.Size = new System.Drawing.Size(240, 225);
+            this.AppsBox.TabIndex = 5;
+            this.AppsBox.SelectedIndexChanged += new System.EventHandler(this.SystemsBox_SelectedIndexChanged);
             // 
             // SearchBox
             // 
-            this.SearchBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.SearchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.SearchBox.Location = new System.Drawing.Point(33, 27);
+            this.SearchBox.Location = new System.Drawing.Point(8, 251);
             this.SearchBox.Name = "SearchBox";
-            this.SearchBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.SearchBox.Size = new System.Drawing.Size(237, 25);
-            this.SearchBox.TabIndex = 6;
+            this.SearchBox.Size = new System.Drawing.Size(226, 20);
+            this.SearchBox.TabIndex = 3;
             this.SearchBox.Text = "Поиск";
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(0, 1);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(240, 17);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Выберите нужное приложение";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // InstalledPage
+            // 
+            this.InstalledPage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.InstalledPage.Controls.Add(this.InstalledLabel);
+            this.InstalledPage.Controls.Add(this.PropButton);
+            this.InstalledPage.Controls.Add(this.DeleteButton);
+            this.InstalledPage.Controls.Add(this.MemLabel);
+            this.InstalledPage.Controls.Add(this.FreeMemLabel);
+            this.InstalledPage.Controls.Add(this.InstalledBox);
+            this.InstalledPage.Location = new System.Drawing.Point(4, 22);
+            this.InstalledPage.Name = "InstalledPage";
+            this.InstalledPage.Size = new System.Drawing.Size(242, 279);
+            this.InstalledPage.TabIndex = 1;
+            this.InstalledPage.Text = "Установленные";
+            // 
+            // InstalledLabel
+            // 
+            this.InstalledLabel.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold);
+            this.InstalledLabel.Location = new System.Drawing.Point(0, 1);
+            this.InstalledLabel.Name = "InstalledLabel";
+            this.InstalledLabel.Size = new System.Drawing.Size(240, 17);
+            this.InstalledLabel.TabIndex = 0;
+            this.InstalledLabel.Text = "Установленные приложения";
+            this.InstalledLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // PropButton
+            // 
+            this.PropButton.Location = new System.Drawing.Point(84, 210);
+            this.PropButton.Name = "PropButton";
+            this.PropButton.Size = new System.Drawing.Size(72, 20);
+            this.PropButton.TabIndex = 4;
+            this.PropButton.Text = "Свойства";
+            this.PropButton.Click += new System.EventHandler(this.PropButton_Click);
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(162, 210);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(72, 20);
+            this.DeleteButton.TabIndex = 3;
+            this.DeleteButton.Text = "Удалить";
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // MemLabel
+            // 
+            this.MemLabel.Location = new System.Drawing.Point(118, 242);
+            this.MemLabel.Name = "MemLabel";
+            this.MemLabel.Size = new System.Drawing.Size(100, 20);
+            this.MemLabel.TabIndex = 5;
+            this.MemLabel.Text = "FreeMem";
+            // 
+            // FreeMemLabel
+            // 
+            this.FreeMemLabel.Location = new System.Drawing.Point(8, 242);
+            this.FreeMemLabel.Name = "FreeMemLabel";
+            this.FreeMemLabel.Size = new System.Drawing.Size(117, 20);
+            this.FreeMemLabel.TabIndex = 6;
+            this.FreeMemLabel.Text = "Доступно памяти:";
+            // 
+            // InstalledBox
+            // 
+            this.InstalledBox.Location = new System.Drawing.Point(0, 18);
+            this.InstalledBox.Name = "InstalledBox";
+            this.InstalledBox.Size = new System.Drawing.Size(242, 186);
+            this.InstalledBox.TabIndex = 0;
+            // 
+            // ListingThreadTimer
+            // 
+            this.ListingThreadTimer.Tick += new System.EventHandler(this.ListingThreadTimer_Tick);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(459, 463);
-            this.Controls.Add(this.SearchBox);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.BackButton);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.SystemsBox);
-            this.Controls.Add(this.menuStrip1);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.ClientSize = new System.Drawing.Size(250, 305);
+            this.Controls.Add(this.TabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
+            this.KeyPreview = true;
+            this.Menu = this.MainMenu;
             this.Name = "MainForm";
             this.Text = "LimFTP Client";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.MainForm_Closing);
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+            this.TabControl.ResumeLayout(false);
+            this.NewPage.ResumeLayout(false);
+            this.NewPage.PerformLayout();
+            this.InstalledPage.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListBox SystemsBox;
+        private System.Windows.Forms.MenuItem ActionsMenuItem;
+        private System.Windows.Forms.MenuItem RefMenu;
+        private System.Windows.Forms.MenuItem ParamsMenuItem;
+        private System.Windows.Forms.MenuItem UpdateMenuItem;
+        private System.Windows.Forms.MenuItem HelpMenuItem;
+        private System.Windows.Forms.MenuItem AboutMenuItem;
+        private System.Windows.Forms.TabControl TabControl;
+        private System.Windows.Forms.TabPage NewPage;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button BackButton;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem ParamsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem AboutToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel ConnectionStatusLabel;
-        private System.Windows.Forms.RichTextBox SearchBox;
+        private System.Windows.Forms.TabPage InstalledPage;
+        private System.Windows.Forms.ListBox AppsBox;
+        private System.Windows.Forms.TextBox SearchBox;
+        private System.Windows.Forms.Label FreeMemLabel;
+        private System.Windows.Forms.ListBox InstalledBox;
+        private System.Windows.Forms.Label MemLabel;
+        private System.Windows.Forms.Button PropButton;
+        private System.Windows.Forms.Button DeleteButton;
+        private System.Windows.Forms.Label InstalledLabel;
+        private System.Windows.Forms.MenuItem RegisterMenuItem;
+        private System.Windows.Forms.Timer ListingThreadTimer;
+        private System.Windows.Forms.MenuItem UpdateSysMenuItem;
     }
 }
 

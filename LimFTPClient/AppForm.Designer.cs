@@ -29,162 +29,106 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AppForm));
-            this.DownloadButton = new System.Windows.Forms.Button();
-            this.AboutAppBox = new System.Windows.Forms.RichTextBox();
-            this.StatusLabel = new System.Windows.Forms.Label();
-            this.AppLogo = new System.Windows.Forms.PictureBox();
+            this.LogoBox = new System.Windows.Forms.PictureBox();
             this.NameLabel = new System.Windows.Forms.Label();
-            this.VersionLabel = new System.Windows.Forms.Label();
+            this.CategoryLabel = new System.Windows.Forms.Label();
             this.SizeLabel = new System.Windows.Forms.Label();
-            this.ShotLabel = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.Label = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.AppLogo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.DownloadButton = new System.Windows.Forms.Button();
+            this.AboutAppBox = new System.Windows.Forms.TextBox();
+            this.StatusLabel = new System.Windows.Forms.Label();
+            this.DownloadingTimer = new System.Windows.Forms.Timer();
             this.SuspendLayout();
+            // 
+            // LogoBox
+            // 
+            this.LogoBox.Image = ((System.Drawing.Image)(resources.GetObject("LogoBox.Image")));
+            this.LogoBox.Location = new System.Drawing.Point(12, 14);
+            this.LogoBox.Name = "LogoBox";
+            this.LogoBox.Size = new System.Drawing.Size(50, 50);
+            this.LogoBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            // 
+            // NameLabel
+            // 
+            this.NameLabel.Location = new System.Drawing.Point(68, 14);
+            this.NameLabel.Name = "NameLabel";
+            this.NameLabel.Size = new System.Drawing.Size(166, 20);
+            this.NameLabel.Text = "Название";
+            // 
+            // CategoryLabel
+            // 
+            this.CategoryLabel.Location = new System.Drawing.Point(68, 32);
+            this.CategoryLabel.Name = "CategoryLabel";
+            this.CategoryLabel.Size = new System.Drawing.Size(166, 20);
+            this.CategoryLabel.Text = "Раздел";
+            // 
+            // SizeLabel
+            // 
+            this.SizeLabel.Location = new System.Drawing.Point(68, 50);
+            this.SizeLabel.Name = "SizeLabel";
+            this.SizeLabel.Size = new System.Drawing.Size(166, 20);
+            this.SizeLabel.Text = "Размер";
             // 
             // DownloadButton
             // 
-            this.DownloadButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.DownloadButton.Cursor = System.Windows.Forms.Cursors.Default;
-            this.DownloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DownloadButton.Font = new System.Drawing.Font("Book Antiqua", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.DownloadButton.Location = new System.Drawing.Point(12, 82);
-            this.DownloadButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.DownloadButton.Location = new System.Drawing.Point(12, 74);
             this.DownloadButton.Name = "DownloadButton";
-            this.DownloadButton.Size = new System.Drawing.Size(88, 27);
-            this.DownloadButton.TabIndex = 0;
+            this.DownloadButton.Size = new System.Drawing.Size(72, 20);
+            this.DownloadButton.TabIndex = 6;
             this.DownloadButton.Text = "Скачать";
-            this.DownloadButton.UseVisualStyleBackColor = false;
             this.DownloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
             // 
             // AboutAppBox
             // 
-            this.AboutAppBox.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.AboutAppBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
             this.AboutAppBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.AboutAppBox.Location = new System.Drawing.Point(12, 115);
-            this.AboutAppBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.AboutAppBox.Location = new System.Drawing.Point(12, 101);
+            this.AboutAppBox.Multiline = true;
             this.AboutAppBox.Name = "AboutAppBox";
-            this.AboutAppBox.ReadOnly = true;
-            this.AboutAppBox.Size = new System.Drawing.Size(266, 236);
-            this.AboutAppBox.TabIndex = 1;
-            this.AboutAppBox.Text = "";
+            this.AboutAppBox.Size = new System.Drawing.Size(222, 190);
+            this.AboutAppBox.TabIndex = 7;
             // 
             // StatusLabel
             // 
-            this.StatusLabel.AutoSize = true;
-            this.StatusLabel.Location = new System.Drawing.Point(190, -55);
-            this.StatusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.StatusLabel.Location = new System.Drawing.Point(92, 77);
             this.StatusLabel.Name = "StatusLabel";
-            this.StatusLabel.Size = new System.Drawing.Size(0, 15);
-            this.StatusLabel.TabIndex = 3;
+            this.StatusLabel.Size = new System.Drawing.Size(142, 20);
+            this.StatusLabel.Text = "Статус";
             // 
-            // AppLogo
+            // DownloadingTimer
             // 
-            this.AppLogo.Image = ((System.Drawing.Image)(resources.GetObject("AppLogo.Image")));
-            this.AppLogo.InitialImage = null;
-            this.AppLogo.Location = new System.Drawing.Point(12, 14);
-            this.AppLogo.Name = "AppLogo";
-            this.AppLogo.Size = new System.Drawing.Size(50, 50);
-            this.AppLogo.TabIndex = 4;
-            this.AppLogo.TabStop = false;
-            // 
-            // NameLabel
-            // 
-            this.NameLabel.AutoSize = true;
-            this.NameLabel.Location = new System.Drawing.Point(68, 14);
-            this.NameLabel.Name = "NameLabel";
-            this.NameLabel.Size = new System.Drawing.Size(59, 15);
-            this.NameLabel.TabIndex = 5;
-            this.NameLabel.Text = "Название";
-            // 
-            // VersionLabel
-            // 
-            this.VersionLabel.AutoSize = true;
-            this.VersionLabel.Location = new System.Drawing.Point(68, 31);
-            this.VersionLabel.Name = "VersionLabel";
-            this.VersionLabel.Size = new System.Drawing.Size(46, 15);
-            this.VersionLabel.TabIndex = 6;
-            this.VersionLabel.Text = "Версия";
-            // 
-            // SizeLabel
-            // 
-            this.SizeLabel.AutoSize = true;
-            this.SizeLabel.Location = new System.Drawing.Point(68, 49);
-            this.SizeLabel.Name = "SizeLabel";
-            this.SizeLabel.Size = new System.Drawing.Size(47, 15);
-            this.SizeLabel.TabIndex = 7;
-            this.SizeLabel.Text = "Размер";
-            // 
-            // ShotLabel
-            // 
-            this.ShotLabel.AutoSize = true;
-            this.ShotLabel.Location = new System.Drawing.Point(294, 14);
-            this.ShotLabel.Name = "ShotLabel";
-            this.ShotLabel.Size = new System.Drawing.Size(65, 15);
-            this.ShotLabel.TabIndex = 8;
-            this.ShotLabel.Text = "Скриншот";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(294, 32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(261, 319);
-            this.pictureBox1.TabIndex = 9;
-            this.pictureBox1.TabStop = false;
-            // 
-            // Label
-            // 
-            this.Label.AutoSize = true;
-            this.Label.Location = new System.Drawing.Point(117, 88);
-            this.Label.Name = "Label";
-            this.Label.Size = new System.Drawing.Size(43, 15);
-            this.Label.TabIndex = 10;
-            this.Label.Text = "Статус";
+            this.DownloadingTimer.Tick += new System.EventHandler(this.DownloadingTimer_Tick);
             // 
             // AppForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(567, 363);
-            this.Controls.Add(this.Label);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.ShotLabel);
-            this.Controls.Add(this.SizeLabel);
-            this.Controls.Add(this.VersionLabel);
-            this.Controls.Add(this.NameLabel);
-            this.Controls.Add(this.AppLogo);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.ClientSize = new System.Drawing.Size(240, 294);
             this.Controls.Add(this.StatusLabel);
             this.Controls.Add(this.AboutAppBox);
             this.Controls.Add(this.DownloadButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.Controls.Add(this.SizeLabel);
+            this.Controls.Add(this.CategoryLabel);
+            this.Controls.Add(this.NameLabel);
+            this.Controls.Add(this.LogoBox);
             this.Name = "AppForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AppForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AppForm_FormClosing);
             this.Load += new System.EventHandler(this.AppForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.AppLogo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.Closing += new System.ComponentModel.CancelEventHandler(this.AppForm_FormClosing);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button DownloadButton;
-        private System.Windows.Forms.RichTextBox AboutAppBox;
-        private System.Windows.Forms.Label StatusLabel;
-        private System.Windows.Forms.PictureBox AppLogo;
+        private System.Windows.Forms.PictureBox LogoBox;
         private System.Windows.Forms.Label NameLabel;
-        private System.Windows.Forms.Label VersionLabel;
+        private System.Windows.Forms.Label CategoryLabel;
         private System.Windows.Forms.Label SizeLabel;
-        private System.Windows.Forms.Label ShotLabel;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label Label;
+        private System.Windows.Forms.Button DownloadButton;
+        private System.Windows.Forms.TextBox AboutAppBox;
+        private System.Windows.Forms.Label StatusLabel;
+        private System.Windows.Forms.Timer DownloadingTimer;
     }
 }

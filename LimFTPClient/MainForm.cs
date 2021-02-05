@@ -25,9 +25,6 @@ namespace LimFTPClient
                 IOHelper.RemoveParameters();
             }
 
-            ExitMenuItem.Enabled = false;
-            PropButton.Enabled = false;
-            DeleteButton.Enabled = false;
             ListingThreadTimer.Enabled = false;
             ListingThreadTimer.Interval = 10;
 
@@ -63,36 +60,40 @@ namespace LimFTPClient
         private void MainForm_Closing(object sender, CancelEventArgs e)
         {
             IOHelper.SaveParameters();
+
+            if (ParamsHelper.OSVersion == 4 && ParamsHelper.IsUninstalling)
+            {
+                e.Cancel = true;
+                ParamsHelper.IsUninstalling = false;
+            }
         }
 
         private void Connect()
         {
             ParamsHelper.CurrentURI = ParamsHelper.SystemURI;
-            ParamsHelper.ThreadEvent = new AutoResetEvent(false);
             ThreadStart ListingStarter = delegate { NetHelper.ReadListing(ParamsHelper.CurrentURI); };
             Thread ListingThread = new Thread(ListingStarter);
             ParamsHelper.IsThreadAlive = true;
             ParamsHelper.IsThreadError = false;
-           
+
             ListingThread.Start();
 
             ListingThreadTimer.Enabled = true;
 
         }
 
-        private void ConnectionStatusLabel_ParentChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
-            int MajorOSVersion = Environment.OSVersion.Version.Major;
+            ParamsHelper.OSVersion = Environment.OSVersion.Version.Major;
 
-            if (MajorOSVersion == 4) ParamsHelper.OSVersion = "WinMobile_2003";
-            else ParamsHelper.OSVersion = "WinMobile_5";
-
-            ParamsHelper.SystemURI = new Uri(ParamsHelper.ServerURI.ToString() + "/" + ParamsHelper.OSVersion);
+            if (ParamsHelper.OSVersion == 4)
+            {
+                ParamsHelper.SystemURI = new Uri(ParamsHelper.ServerURI.ToString() + "/WinMobile_2003");
+            }
+            else
+            {
+                ParamsHelper.SystemURI = new Uri(ParamsHelper.ServerURI.ToString() + "/WinMobile_5");
+            }
 
             GetAppsList();
 
@@ -100,7 +101,7 @@ namespace LimFTPClient
         }
 
         private void GetAppsList()
-        {   
+        {
             InstalledBox.DataSource = null;
             InstalledBox.Items.Clear();
 
@@ -125,20 +126,36 @@ namespace LimFTPClient
             string AppName = AppsBox.Text.Replace(" ", "_");
             ParamsHelper.AppURI = new Uri(ParamsHelper.CurrentURI.ToString() + "/" + AppName);
             ParamsHelper.CurrentURI = ParamsHelper.AppURI;
-            //MessageBox.Show(Parameters.CurrentURI.ToString());
 
             Cursor.Current = Cursors.WaitCursor;
 
-            //AppForm NewAppForm = new AppForm(AppName);
-            //NewAppForm.ShowDialog();
+            AppForm NewAppForm = new AppForm(AppName);
+            NewAppForm.ShowDialog();
 
             Cursor.Current = Cursors.Default;
-
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
+            bool IsUninstalled = false;
 
+            if (!String.IsNullOrEmpty(InstalledBox.Text))
+            {
+                //AboutAppBox NewAboutAppBox = new AboutAppBox(InstalledBox.Text);
+                //string AppName = NewAboutAppBox.AppProduct;
+                //IsUninstalled = SystemHelper.AppUninstall(InstalledBox.Text);
+
+                if (!IsUninstalled)
+                {
+                    MessageBox.Show("Удаление не удалось");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Приложение не выбрано", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+            }
+
+            GetAppsList();
         }
 
         private void PropButton_Click(object sender, EventArgs e)
@@ -150,7 +167,7 @@ namespace LimFTPClient
             }
             else
             {
-                MessageBox.Show("Приложение не выбрано", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);    
+                MessageBox.Show("Приложение не выбрано", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
             }
         }
 
@@ -158,15 +175,13 @@ namespace LimFTPClient
         {
             try
             {
-                MemLabel.Text = ParamsHelper.BytesToMegs(IOHelper.GetStorageSpace(ParamsHelper.DownloadPath)).ToString("0.##") + " МБ";
+                MemLabel.Text = ParamsHelper.BytesToMegs(IOHelper.GetStorageSpace(ParamsHelper.InstallPath)).ToString("0.##") + " МБ";
             }
             catch (ArgumentNullException)
             {
                 MemLabel.Text = "0 байт";
             }
 
-            PropButton.Enabled = !PropButton.Enabled;
-            //RegisterMenuItem.Enabled = !RegisterMenuItem.Enabled;
         }
 
         private void ListingThreadTimer_Tick(object sender, EventArgs e)
@@ -179,11 +194,19 @@ namespace LimFTPClient
                     {
                         throw ParamsHelper.ThreadException;
                     }
-                    catch
+                    catch (Exception NewEx)
                     {
                         ListingThreadTimer.Enabled = false;
                         Cursor.Current = Cursors.Default;
-                        MessageBox.Show("Не удалось подключиться к серверу", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
+
+                        if (NewEx.Message == "Repository is empty")
+                        {
+                            MessageBox.Show("Отсуствуют доступные приложения", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Не удалось подключиться к серверу", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
+                        }
                     }
 
                 }
@@ -220,12 +243,18 @@ namespace LimFTPClient
         private void UpdateSysMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox NewAboutBox = new AboutBox();
-            string Version = NetHelper.CheckUpdates();
             string CurrentVersion = NewAboutBox.AssemblyVersion;
+            string Version;
 
-            MessageBox.Show("Последняя версия: " + Version, "Сообщение");
-
-            /*
+            try
+            {
+                Version = NetHelper.CheckUpdates();
+            }
+            catch
+            {
+                MessageBox.Show("Не удалось проверить наличие обновлений", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
+                return;
+            }
 
             if (CurrentVersion != Version)
             {
@@ -234,29 +263,36 @@ namespace LimFTPClient
                 if (Result == DialogResult.Yes)
                 {
                     Version = Version.Remove(Version.LastIndexOf('.'), 2);
-                    string Response = FTPHelper.GetUpdates(Version);
+
+                    try
+                    {
+                        Cursor.Current = Cursors.WaitCursor;
+                        NetHelper.GetUpdates(Version);
+                        Cursor.Current = Cursors.Default;
+                    }
+                    catch
+                    {
+                        Cursor.Current = Cursors.Default;
+                        MessageBox.Show("Не удалось загрузить обновление", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
+                    }
+
+                    //SystemHelper.CabInstall(ParamsHelper.DownloadPath + "\\Update.bat", ParamsHelper.InstallPath + "\\LimFTPClient", true);
                 }
             }
             else
             {
-                MessageBox.Show("Последняя версия", "Сообщение");   
+                MessageBox.Show("Последняя версия", "Сообщение");
             }
-             */
+        }
+
+        private void SearchBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void ExitMenuItem_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void FreeMemLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MemLabel_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

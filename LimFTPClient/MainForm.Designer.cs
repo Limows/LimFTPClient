@@ -257,7 +257,6 @@
             this.MemLabel.Size = new System.Drawing.Size(93, 20);
             this.MemLabel.TabIndex = 5;
             this.MemLabel.Text = "FreeMem";
-            this.MemLabel.Click += new System.EventHandler(this.MemLabel_Click);
             // 
             // FreeMemLabel
             // 
@@ -267,7 +266,6 @@
             this.FreeMemLabel.Size = new System.Drawing.Size(112, 20);
             this.FreeMemLabel.TabIndex = 6;
             this.FreeMemLabel.Text = "Доступно памяти:";
-            this.FreeMemLabel.Click += new System.EventHandler(this.FreeMemLabel_Click);
             // 
             // InstalledBox
             // 

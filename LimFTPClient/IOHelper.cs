@@ -45,6 +45,22 @@ namespace LimFTPClient
             return 0;
         }
 
+        public static List<string> GetDrivesList()
+        {
+            DriveInfo[] Drives = DriveInfo.GetDrives();
+            List<string> DrivesNames = new List<string>();
+
+            foreach (DriveInfo drive in Drives)
+            {
+                if (drive.IsReady == true && drive.DriveType == DriveType.Fixed)
+                {
+                    DrivesNames.Add(drive.Name);
+                }
+            }
+
+            return DrivesNames;
+        }
+
         /// <summary>
         /// Extract zip archive to directory
         /// </summary>
@@ -101,8 +117,23 @@ namespace LimFTPClient
             }
         }
 
+        static public string ReadTextFile(string Path)
+        {
+            FileInfo File = new FileInfo(Path);
+
+            using (TextReader Reader = new StreamReader(File.OpenRead()))
+            {
+                return Reader.ReadToEnd();
+            }
+        }
+
+        static public void CleanBuffer()
+        {
+            Directory.Delete(GetCurrentDirectory() + "\\Temp", true);
+        }
+
         static private string GetConfigPath()
-        {   
+        {
             return GetCurrentDirectory() + "\\Default.cfg";
         }
 
@@ -112,7 +143,7 @@ namespace LimFTPClient
         /// <returns>Current directory path</returns> 
         static public string GetCurrentDirectory()
         {
-            return Directory.GetCurrentDirectory();
+            return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         }
 
         static public void SaveParameters()

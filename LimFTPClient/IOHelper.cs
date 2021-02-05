@@ -11,7 +11,7 @@ using ICSharpCode.SharpZipLib.Zip;
 namespace LimFTPClient
 {
 
-    class IO
+    class IOHelper
     {
         [DllImport("coredll.dll", SetLastError = true, CharSet = CharSet.Auto)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -86,7 +86,7 @@ namespace LimFTPClient
         {
             if (String.IsNullOrEmpty(ParamsHelper.ConfigPath))
             {
-                ParamsHelper.ConfigPath = IO.GetConfigPath();
+                ParamsHelper.ConfigPath = IOHelper.GetConfigPath();
             }
 
             FileInfo ConfigFile = new FileInfo(ParamsHelper.ConfigPath);
@@ -119,7 +119,7 @@ namespace LimFTPClient
         {
             if (String.IsNullOrEmpty(ParamsHelper.ConfigPath))
             {
-                ParamsHelper.ConfigPath = IO.GetConfigPath();
+                ParamsHelper.ConfigPath = IOHelper.GetConfigPath();
             }
 
             FileInfo ConfigFile = new FileInfo(ParamsHelper.ConfigPath);
@@ -143,7 +143,7 @@ namespace LimFTPClient
         {
             if (String.IsNullOrEmpty(ParamsHelper.ConfigPath))
             {
-                ParamsHelper.ConfigPath = IO.GetConfigPath();
+                ParamsHelper.ConfigPath = IOHelper.GetConfigPath();
             }
 
             File.Delete(ParamsHelper.ConfigPath);

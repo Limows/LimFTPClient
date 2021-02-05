@@ -7,7 +7,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Net;
 using System.Threading;
-using WinMobileNetCFExt.About;
 
 namespace LimFTPClient
 {
@@ -19,14 +18,14 @@ namespace LimFTPClient
 
             try
             {
-                IO.LoadParameters();
+                IOHelper.LoadParameters();
             }
             catch
             {
-                IO.RemoveParameters();
+                IOHelper.RemoveParameters();
             }
 
-            RegisterMenuItem.Enabled = false;
+            ExitMenuItem.Enabled = false;
             PropButton.Enabled = false;
             DeleteButton.Enabled = false;
             ListingThreadTimer.Enabled = false;
@@ -63,7 +62,7 @@ namespace LimFTPClient
 
         private void MainForm_Closing(object sender, CancelEventArgs e)
         {
-            IO.SaveParameters();
+            IOHelper.SaveParameters();
         }
 
         private void Connect()
@@ -108,7 +107,7 @@ namespace LimFTPClient
             try
             {
                 List<string> InstalledList = new List<string>();
-                InstalledList = Sys.GetInstalledApps();
+                InstalledList = SystemHelper.GetInstalledApps();
 
                 foreach (string app in InstalledList)
                 {
@@ -130,8 +129,8 @@ namespace LimFTPClient
 
             Cursor.Current = Cursors.WaitCursor;
 
-            AppForm NewAppForm = new AppForm(AppName);
-            NewAppForm.ShowDialog();
+            //AppForm NewAppForm = new AppForm(AppName);
+            //NewAppForm.ShowDialog();
 
             Cursor.Current = Cursors.Default;
 
@@ -146,8 +145,8 @@ namespace LimFTPClient
         {
             if (!String.IsNullOrEmpty(InstalledBox.Text))
             {
-                AboutAppBox NewAboutAppBox = new AboutAppBox(InstalledBox.Text);
-                NewAboutAppBox.ShowDialog();
+                //AboutAppBox NewAboutAppBox = new AboutAppBox(InstalledBox.Text);
+                //NewAboutAppBox.ShowDialog();
             }
             else
             {
@@ -159,7 +158,7 @@ namespace LimFTPClient
         {
             try
             {
-                MemLabel.Text = ParamsHelper.BytesToMegs(IO.GetStorageSpace(ParamsHelper.DownloadPath)).ToString("0.##") + " МБ";
+                MemLabel.Text = ParamsHelper.BytesToMegs(IOHelper.GetStorageSpace(ParamsHelper.DownloadPath)).ToString("0.##") + " МБ";
             }
             catch (ArgumentNullException)
             {
@@ -168,11 +167,6 @@ namespace LimFTPClient
 
             PropButton.Enabled = !PropButton.Enabled;
             //RegisterMenuItem.Enabled = !RegisterMenuItem.Enabled;
-        }
-
-        private void RegisterMenuItem_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void ListingThreadTimer_Tick(object sender, EventArgs e)
@@ -250,5 +244,19 @@ namespace LimFTPClient
              */
         }
 
+        private void ExitMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void FreeMemLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MemLabel_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

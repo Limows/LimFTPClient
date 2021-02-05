@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace LimFTPClient
 {
-    class Sys
+    class SystemHelper
     {
         /// <summary>
         /// Get list of installed apps

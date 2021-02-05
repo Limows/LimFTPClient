@@ -124,7 +124,7 @@ namespace LimFTPClient
         private void SystemsBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string AppName = AppsBox.Text.Replace(" ", "_");
-            ParamsHelper.AppURI = new Uri(ParamsHelper.CurrentURI.ToString() + "/" + AppName);
+            ParamsHelper.AppURI = new Uri(ParamsHelper.CurrentURI.ToString() + "//" + AppName);
             ParamsHelper.CurrentURI = ParamsHelper.AppURI;
 
             Cursor.Current = Cursors.WaitCursor;

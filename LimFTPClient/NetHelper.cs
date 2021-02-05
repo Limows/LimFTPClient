@@ -25,6 +25,21 @@ namespace LimFTPClient
             return Response.GetResponseStream();
         }
 
+        static private ulong GetFileSizeRequest(Uri URI)
+        {
+            FtpWebRequest FTPRequest = (FtpWebRequest)FtpWebRequest.Create(URI);
+            FTPRequest.UseBinary = true;
+            FTPRequest.KeepAlive = false;
+            FTPRequest.Credentials = new NetworkCredential("anon", "");
+            FTPRequest.Method = WebRequestMethods.Ftp.GetFileSize;
+
+            FtpWebResponse response = (FtpWebResponse)FTPRequest.GetResponse();
+            long FileSize = response.ContentLength;
+            response.Close();
+
+            return (ulong)FileSize;
+        }
+
         /// <summary>
         /// Retrieves a file from the FTP server
         /// </summary>
@@ -96,25 +111,50 @@ namespace LimFTPClient
         /// <param name="AppName"></param>
         /// <returns>The file info as a string</returns> 
         static public string LoadInfo(Uri URI, string AppName)
-        {   
-
-            Stream FTPReader = CreateDownloadRequest(URI);
+        {
+            Uri InfoUri = new Uri(URI.ToString() + "/" + AppName + ".info");
+            Uri FileUri = new Uri(URI.ToString() + "/" + AppName + ".zip");
+            Uri LogoUri = new Uri(URI.ToString() + "/Logo.png");
+            string AppSize = "";
             string AppInfo = "";
+            string AppScrShot = null;
+            string AppLogo = null;
             int bufferSize = 1024;
             int readCount;
             byte[] buffer = new byte[bufferSize];
 
-            readCount = FTPReader.Read(buffer, 0, bufferSize);
-            while (readCount > 0)
+            try
             {
-                AppInfo += Encoding.UTF8.GetString(buffer, 0, bufferSize);
-                readCount = FTPReader.Read(buffer, 0, bufferSize);
+                using (Stream FTPReader = CreateDownloadRequest(InfoUri))
+                {
+
+
+                    readCount = FTPReader.Read(buffer, 0, bufferSize);
+                    while (readCount > 0)
+                    {
+                        AppInfo += Encoding.UTF8.GetString(buffer, 0, bufferSize);
+                        readCount = FTPReader.Read(buffer, 0, bufferSize);
+                    }
+
+                }
+
+            }
+            catch
+            {
+                AppInfo = null;
             }
 
-            FTPReader.Dispose();
-            FTPReader.Close();
+            try
+            {
+                AppSize = ParamsHelper.BytesToMegs(GetFileSizeRequest(FileUri)).ToString("0.##") + " МБ";
+            }
+            catch
+            {
+                throw;
+                AppSize = null;
+            }
 
-            return AppInfo;
+            return AppSize + "\n" + AppInfo + "\n" + AppLogo + "\n" + AppScrShot;
 
             /*
             FTP Ftp = new FTP(URI.Host, URI.Port);

@@ -102,8 +102,8 @@ namespace LimFTPClient
                 DescriptionBox.Text = "Для этого приложения ещё нет описания";
             }
             else
-            {   
-                DescriptionBox.Text = IOHelper.ReadTextFile(InfoName);
+            {
+                DescriptionBox.Text = InfoName;
             }
 
             if (String.IsNullOrEmpty(LogoName))

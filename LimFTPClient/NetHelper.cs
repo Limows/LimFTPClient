@@ -196,7 +196,7 @@ namespace LimFTPClient
             HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(URI);
             HttpWebResponse Response = (HttpWebResponse)Request.GetResponse();
 
-            using (FileStream UpdateFile = new FileStream(ParamsHelper.DownloadPath + "\\Update.cab", FileMode.Create, FileAccess.Write))
+            using (FileStream UpdateFile = new FileStream(ParamsHelper.DownloadPath + "\\Update.zip", FileMode.Create, FileAccess.Write))
             {
                 using (BinaryReader Reader = new BinaryReader(Response.GetResponseStream()))
                 {

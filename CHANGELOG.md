@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.5.0] - (05.02.21)
+
+### Added
+ 
+### Changed 
+
+ - Completely rewritten version, ported from Win Mobile
+ 
+### Fixed
+
 ## [v0.3.7] - (20.01.21)
 
 ### Added

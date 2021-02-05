@@ -35,7 +35,7 @@ namespace LimFTPClient
 
         private void HelpMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Для выбора приложения кликните по его названию в списке", "Справка", MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1);
+            MessageBox.Show("Для выбора приложения дважды кликните\nпо его названию в списке", "Справка", MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1);
         }
 
         private void AboutMenuItem_Click(object sender, EventArgs e)

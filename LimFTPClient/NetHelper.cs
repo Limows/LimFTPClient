@@ -49,60 +49,26 @@ namespace LimFTPClient
         static public void DownloadFile(Uri URI, string FilePath, string FileName)
         {
             URI = new Uri(URI.ToString() + "/" + FileName);
-            Stream FTPReader = CreateDownloadRequest(URI);
-            FileStream outputStream;
 
-            //FTPReader.Close();
-
-            try
+            using (Stream FTPReader = CreateDownloadRequest(URI))
             {
-                outputStream = new FileStream(FilePath, FileMode.Create);
-            }
-            catch
-            {
-                FTPReader.Dispose();
-                FTPReader.Close();
+                using (FileStream outputStream = new FileStream(FilePath + "\\" + FileName, FileMode.Create))
+                {
+                    int bufferSize = 1024;
+                    int readCount;
+                    byte[] buffer = new byte[bufferSize];
 
-                throw;
-            }
+                    readCount = FTPReader.Read(buffer, 0, bufferSize);
 
-            int bufferSize = 1024;
-            int readCount;
-            byte[] buffer = new byte[bufferSize];
-
-            readCount = FTPReader.Read(buffer, 0, bufferSize);
-            while (readCount > 0)
-            {
-                outputStream.Write(buffer, 0, readCount);
-                readCount = FTPReader.Read(buffer, 0, bufferSize);
+                    while (readCount > 0)
+                    {
+                        outputStream.Write(buffer, 0, readCount);
+                        readCount = FTPReader.Read(buffer, 0, bufferSize);
+                    }
+                }
             }
 
-            outputStream.Close();
-            FTPReader.Dispose();
-            FTPReader.Close();
         }
-        /*
-        static public void DownloadFile(Uri URI, string DownloadDir, string FileName)
-        {
-            FTP Ftp = new FTP(URI.Host, URI.Port);
-
-            Ftp.BeginConnect(URI.UserInfo, "");
-
-            try
-            {
-                Ftp.ChangeDirectory(URI.AbsolutePath);
-
-                Ftp.GetFile(FileName, DownloadDir + "\\" + FileName, true);
-            }
-            catch
-            {
-                Ftp.Disconnect();
-                throw;
-            }
-
-            Ftp.Disconnect();
-        }
-        */
 
         /// <summary>
         /// Retrieves a package information from the FTP server
@@ -155,31 +121,6 @@ namespace LimFTPClient
             }
 
             return AppSize + "\n" + AppInfo + "\n" + AppLogo + "\n" + AppScrShot;
-
-            /*
-            FTP Ftp = new FTP(URI.Host, URI.Port);
-            string FileName = AppName + ".zip";
-            string FileSize;
-
-            Ftp.BeginConnect(URI.UserInfo, "");
-
-            try
-            {
-                Ftp.ChangeDirectory(URI.AbsolutePath);
-
-                FileSize = Ftp.GetFileSize(FileName);
-                FileSize = ParamsHelper.BytesToMegs((ulong)Convert.ToInt64(FileSize)).ToString("0.##") + " МБ";
-            }
-            catch
-            {
-                Ftp.Disconnect();
-                throw;
-            }
-
-            Ftp.Disconnect();
-
-            return FileSize;
-            */
         }
 
         static private Stream CreateListingRequest(Uri URI)
@@ -232,62 +173,10 @@ namespace LimFTPClient
             ParamsHelper.IsThreadAlive = false;
 
         }
-        /*
-        static public void ReadListing(Uri URI)
-        {
-            FTP Ftp = new FTP(URI.Host, URI.Port);
-            ParamsHelper.AppsList = new List<string>();
-            string Listing;
-
-            Ftp.BeginConnect(URI.UserInfo, "");
-
-            try
-            {
-                Ftp.ChangeDirectory(URI.AbsolutePath);
-                Listing = Ftp.GetFileList(false);
-            }
-            catch(Exception NewEx)
-            {
-                Listing = "";
-                Ftp.Disconnect();
-                ParamsHelper.IsThreadAlive = false;
-                ParamsHelper.IsThreadError = true;
-                ParamsHelper.ThreadException = NewEx;
-                return;
-            }
-
-            string[] Files = Listing.Replace("\n", "").Split('\r');
-
-            foreach (string file in Files)
-            {
-                if (!String.IsNullOrEmpty(file) && file.IndexOf('.') == -1)
-                {   
-                    ParamsHelper.AppsList.Add(file.Replace("_", " "));
-                }
-            }
-
-            if (ParamsHelper.AppsList.Count == 0)
-            {
-                ParamsHelper.CurrentURI = ParamsHelper.ServerURI;
-                Ftp.Disconnect();
-                ParamsHelper.IsThreadAlive = false;
-                ParamsHelper.IsThreadError = true;
-                ParamsHelper.ThreadException = new Exception("Repo is empty");
-                return;
-            }
-
-            Ftp.Disconnect();
-
-            ParamsHelper.ThreadEvent.Set();
-
-            ParamsHelper.IsThreadAlive = false;
-
-        }
-        */
 
         static public string CheckUpdates()
         {
-            Uri URI = new Uri("http://limowski.xyz:80/LimFTPClientVersion.txt");
+            Uri URI = new Uri("http://limowski.xyz:80/downloads/LimFTPClient/Win9xNT/LimFTPClientVersion.txt");
             HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(URI);
             HttpWebResponse Response = (HttpWebResponse)Request.GetResponse();
             string ResponseMessage;
@@ -301,20 +190,26 @@ namespace LimFTPClient
             return ResponseMessage;
         }
 
-        static public string GetUpdates(string Version)
-        {   
-            Uri URI = new Uri("https://github.com/Limows/LimFTPClient_WM/releases/download/v" + Version + "/LimFTPClient.cab");
+        static public void GetUpdates(string Version)
+        {
+            Uri URI = new Uri("http://limowski.xyz:80/downloads/LimFTPClient/Win9xNT/LimFTPClient.zip");
             HttpWebRequest Request = (HttpWebRequest)WebRequest.Create(URI);
             HttpWebResponse Response = (HttpWebResponse)Request.GetResponse();
-            string ResponseMessage;
 
-            using (StreamReader stream = new StreamReader(Response.GetResponseStream(), Encoding.UTF8))
+            using (FileStream UpdateFile = new FileStream(ParamsHelper.DownloadPath + "\\Update.cab", FileMode.Create, FileAccess.Write))
             {
-                ResponseMessage = stream.ReadToEnd();
-                ResponseMessage = ResponseMessage.Replace("\n", "");
-            }
+                using (BinaryReader Reader = new BinaryReader(Response.GetResponseStream()))
+                {
+                    int BufSize = 2048;
+                    byte[] Buffer = new byte[BufSize];
+                    int Count = 0;
 
-            return ResponseMessage;
+                    while ((Count = Reader.Read(Buffer, 0, BufSize)) > 0)
+                    {
+                        UpdateFile.Write(Buffer, 0, Count);
+                    }
+                }
+            }
         }
 
     }
